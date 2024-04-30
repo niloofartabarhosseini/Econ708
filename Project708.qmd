@@ -1,0 +1,620 @@
+---
+title: "The effect of MMLs on Death Rate"
+format: html
+editor: visual
+---
+
+# Introduction
+
+Marijuana is one of the most used illicit substances in the world. Over the past few decades, marijuana legislation has changed in the United States and some states have adopted medical marijuana laws (MMLs). MMLs remove state-level penalties for using, possessing, and cultivating medical marijuana (Anderson, Hansen, Rees, 2013). Hence, it has received attention not only due to changes in access but also because of the potential effects on public health.
+
+A growing number of studies have focused on the potential outcomes of MMLs.  Among the most critical outcomes are mortality rates across different causes of death, such as those related to drug overdoses (e.g. Chihuri, & Li, 2019; Powell, Pacula, & Jacobson, 2018; Kim et al., 2016), traffic accidents (e.g. Anderson, Hansen, Rees, 2013; Bartos, Newark, & McCleary, 2020; Els et al., 2020), suicides (e.g. Anderson, Rees, & Sabia, 2014; Bartos et al, 2019), diseases (e.g. Franz, & Frishman, 2016) and criminal activity (e.g. Adams 2008; Blankstein 2010; Morris et al., 2014). However, these studies have been fragmented across different disciplines with inconsistent findings which complicate our understandings of MMLs actual impact.
+
+Moreover, the effects of MMLs on mortality are complex and can involve complex interactions that are not captured when only single categories of death are considered. For instance, MMLs can influence alcohol consumption (Anderson, Rees, & Sabia, 2014), mental health (Kalbfuß, Odermatt, & Stutzer, 2018), and crime rates, which all of them may have interconnected effects on mortality. This underscores the necessity for a comprehensive analysis that considers the aggregate impact of MMLs on all categories of mortality.
+
+To address this gap, this paper provides a comprehensive view of how MMLs influence overall mortality rates. By using the CDC WONDER database, we analyze mortality data from 1999 to 2020. We employ a difference-in-differences approach which allows us to control for both time and year fixed effects and unobserved heterogeneity between treatment and control groups which in turn isolates the effect of MMLs on mortality rates across the United States. We find that although there was a decrease in mortality rates in both states with and without MMLs, the reduction in mortality was more pronounced in states that implemented MMLs
+
+The findings of this study benefit policy makers by providing a clear picture of the overall impact of MMLs. While studies of specific outcomes are valuable, a holistic view of the effect of MMLs on total mortality is crucial for informed policy decisions that consider all potential public health impacts.
+
+The rest of the paper is organized as follows: first, we begin with a brief review of the relevant literature, develop hypotheses and describe our empirical context. Then, we conclude.
+
+# Literature Review
+
+The relationship between MMLs and death rate outcomes has been studied in various areas yet remains a complex field with inconsistent findings across different areas of mortality.
+
+A significant body of research has explored the impact of MMLs on opioid overdoses. For example, study by Kim et al. (2016) found results that are different by age. While they found a reduction in opioid positivity for most states after the implementation of an operational MML, these estimates were not significant. However, a significant reduction in opioid positivity was found among aged 21 to 40. This finding suggests that the effectiveness of MMLs may be more pronounced in some demographic groups, maybe due to the greater consumption of medical marijuana among younger adults.
+
+In a similar vein, Powell, Pacula, and Jacobson (2018) showed that MMLs are associated with reductions in opioid overdose deaths as patients opt for marijuana over opioids for pain management. This suggests that MMLs may play a critical role in addressing the opioid crisis. Their research supports the hypothesis that easier access to medical marijuana can lead to decreased reliance on opioids, and consequently reduce the rates of deaths by overdose.
+
+However, the systematic review by Chihuri and Li (2019) presents a more complex picture. It shows that the impact of MMLs on opioid overdose mortality is not statistically significant across all studies. While some reports within the review noted decreases in opioid-related deaths, others found no significant changes or even increases.
+
+Following the opioid overdose discussions, another critical area influenced by MMLs is traffic fatality. For example, Anderson, Hansen, and Rees (2013) explored MMLs impact on traffic fatality. Their findings suggest that the introduction of medical marijuana laws leads to a reduction in traffic fatalities, especially those involving alcohol. Following on Anderson’s et al findings, Bartos, Newark, and McCleary (2020) investigated the issue with another methodological approach. They find a large decrease in statewide motor vehicle fatalities in California after the enactment of its MML. However, the study by Els et al (2019) indicates a contrasting finding. By conducting a systematic review and meta-analysis that assessed the impact of cannabis use on road traffic collisions and including 11 studies, they found that the presence of cannabis significantly increased the risk of road traffic fatalities.
+
+Another stream of studies has focused on the impact of MMLs on suicide. For instance, study by Anderson, Rees, & Sabia (2014) investigated the association between the legalization of medical marijuana and suicide rates and found that while the overall association between medical marijuana legalization and suicide was not statistically significant, there were reductions in suicide rates among specific age group. Their findings suggest a potential protective effect of medical marijuana legalization on younger men, which can be attributed to marijuana's use as a coping mechanism for stress or mental health issues. Additionally, Bartos et al (2019) provides further evidence of the impact of medical marijuana laws on suicide rates. They found statistically significant reductions in total suicides and gun-related suicides in California after the enactment of medical marijuana legislation.
+
+The review by Franz and Frishman (2016) delves into the impact of MMLs on cardiovascular disease. Their findings show increased risks of heart-related issues after marijuana consumption which may even exacerbate conditions in individuals who have pre-existing heart diseases. However, longitudinal studies have not shown a significant long-term impact on mortality from cardiovascular causes. In addition, the study by Abouk and Adams (2018) investigated the association between MMLs and cardiovascular deaths. They found that after the MMLs, there was a statistically significant increase in the rate of cardiac deaths among older adults and These increases were even higher in states with less controls on marijuana dispensing which suggests that the broader accessibility of cannabis may lead to increased cardiovascular risks among the most vulnerable older populations.
+
+While the existing literature provides insights into the effects of MMLs on various mortality outcomes, they have focused on specific causes of death. That is,  these studies often isolates the effects of MMLs on opioid overdoses, traffic fatalities, suicides, and cardiovascular diseases. They have offered valuable but fragmented findings. This study seeks to bridge these gaps by conducting a comprehensive analysis of the overall impact of MMLs on all-cause mortality rates across the United States. Building on previous studies which mostly find negative relationship(there are some exceptions), we hypothesize that MMLs decrease the death rate in overall:\
+Hypothesis 1: All-else equal, Compared to states without MMLs, states with MMLs experience a decrease in death rate.
+
+```{r}
+library(readxl)
+
+excel_file <- read_excel("/Users/niloofartabarhosseini/Desktop/Data_01.xlsx", sheet = 'all')
+control_variables <- read_excel("/Users/niloofartabarhosseini/Desktop/Income_Unemployement.xlsx")
+
+df_All <- read_excel("/Users/niloofartabarhosseini/Desktop/Data_01.xlsx", sheet = "all")
+
+#df_Less1 <- read_excel("/Users/niloofartabarhosseini/Desktop/Data_01.xlsx", sheet = "<1")
+#df_Less1_cleaned <- df_Less1 %>%
+#  filter(!if_any(everything(), ~ .x == 'Unreliable'))
+df_1_4 <- read_excel("/Users/niloofartabarhosseini/Desktop/Data_01.xlsx", sheet = '1-4')
+#df_1_4_cleaned <- df_1_4 %>%
+#  filter(!if_any(everything(), ~ .x == 'Unreliable'))
+df_5_9 <- read_excel("/Users/niloofartabarhosseini/Desktop/Data_01.xlsx", sheet = '5-9')
+#df_5_9_cleaned <- df_5_9 %>%
+#  filter(!if_any(everything(), ~ .x == 'Unreliable'))
+df_10_14 <- read_excel("/Users/niloofartabarhosseini/Desktop/Data_01.xlsx", sheet = '10-14')
+#df_10_14_cleaned <- df_10_14 %>%
+#  filter(!if_any(everything(), ~ .x == 'Unreliable'))
+df_15_19 <- read_excel("/Users/niloofartabarhosseini/Desktop/Data_01.xlsx", sheet = '15-19')
+#df_15_19_cleaned <- df_15_19 %>%
+#  filter(!if_any(everything(), ~ .x == 'Unreliable'))
+df_20_24 <- read_excel("/Users/niloofartabarhosseini/Desktop/Data_01.xlsx", sheet = '20-24')
+#df_20_24_cleaned <- df_20_24 %>%
+#  filter(!if_any(everything(), ~ .x == 'Unreliable'))
+df_25_29 <- read_excel("/Users/niloofartabarhosseini/Desktop/Data_01.xlsx", sheet = '25-29')
+#df_25_29_cleaned <- df_25_29 %>%
+#  filter(!if_any(everything(), ~ .x == 'Unreliable'))
+df_30_34 <- read_excel("/Users/niloofartabarhosseini/Desktop/Data_01.xlsx", sheet = '30-34')
+#df_30_34_cleaned <- df_30_34 %>%
+#  filter(!if_any(everything(), ~ .x == 'Unreliable'))
+df_35_39 <- read_excel("/Users/niloofartabarhosseini/Desktop/Data_01.xlsx", sheet = '35-39')
+df_Dates <- read_excel("/Users/niloofartabarhosseini/Desktop/Data_01.xlsx", sheet = 'DATES')
+
+
+df_All <- df_All[!grepl("^\\s*Total\\s*$", df_All$Notes, ignore.case = TRUE), ]
+#df_Less1 <- df_Less1[df_Less1$Notes != 'Total', ]
+df_1_4 <- df_1_4[!grepl("^\\s*Total\\s*$", df_1_4$Notes, ignore.case = TRUE), ]
+df_5_9 <- df_5_9[!grepl("^\\s*Total\\s*$", df_5_9$Notes, ignore.case = TRUE), ]
+df_10_14 <- df_10_14[!grepl("^\\s*Total\\s*$", df_10_14$Notes, ignore.case = TRUE), ]
+df_15_19 <- df_15_19[!grepl("^\\s*Total\\s*$", df_15_19$Notes, ignore.case = TRUE), ]
+df_20_24 <- df_20_24[!grepl("^\\s*Total\\s*$", df_20_24$Notes, ignore.case = TRUE), ]
+df_25_29 <- df_25_29[!grepl("^\\s*Total\\s*$", df_25_29$Notes, ignore.case = TRUE), ]
+df_30_34 <- df_30_34[!grepl("^\\s*Total\\s*$", df_30_34$Notes, ignore.case = TRUE), ]
+df_35_39 <- df_35_39[!grepl("^\\s*Total\\s*$", df_35_39$Notes, ignore.case = TRUE), ]
+
+df_All <- df_All[!duplicated(df_All[c('State', 'State Code', 'Year')]), ]
+#df_Less1 <- df_Less1[!duplicated(df_Less1[c('State', 'State Code', 'Year')]), ]
+df_1_4 <- df_1_4[!duplicated(df_1_4[c('State', 'State Code', 'Year')]), ]
+df_5_9 <- df_5_9[!duplicated(df_5_9[c('State', 'State Code', 'Year')]), ]
+df_10_14 <- df_10_14[!duplicated(df_10_14[c('State', 'State Code', 'Year')]), ]
+df_15_19 <- df_15_19[!duplicated(df_15_19[c('State', 'State Code', 'Year')]), ]
+df_20_24 <- df_20_24[!duplicated(df_20_24[c('State', 'State Code', 'Year')]), ]
+df_25_29 <- df_25_29[!duplicated(df_25_29[c('State', 'State Code', 'Year')]), ]
+df_30_34 <- df_30_34[!duplicated(df_30_34[c('State', 'State Code', 'Year')]), ]
+df_35_39 <- df_35_39[!duplicated(df_35_39[c('State', 'State Code', 'Year')]), ]
+
+#df_All <- merge(df_All, df_Less1, by = c('State', 'State Code', 'Year'), suffixes = c('', '_Less1'))
+df_All <- merge(df_All, df_1_4, by = c('State', 'State Code', 'Year'), suffixes = c('', '_1_4'))
+df_All <- merge(df_All, df_5_9, by = c('State', 'State Code', 'Year'), suffixes = c('', '_5_9'))
+df_All <- merge(df_All, df_10_14, by = c('State', 'State Code', 'Year'), suffixes = c('', '_10_14'))
+df_All <- merge(df_All, df_15_19, by = c('State', 'State Code', 'Year'), suffixes = c('', '_15_19'))
+df_All <- merge(df_All, df_20_24, by = c('State', 'State Code', 'Year'), suffixes = c('', '_20_24'))
+df_All <- merge(df_All, df_25_29, by = c('State', 'State Code', 'Year'), suffixes = c('', '_25_29'))
+df_All <- merge(df_All, df_30_34, by = c('State', 'State Code', 'Year'), suffixes = c('', '_30_34'))
+df_All <- merge(df_All, df_35_39, by = c('State', 'State Code', 'Year'), suffixes = c('', '_35_39'))
+
+#| echo: false
+```
+
+# Data
+
+The death data utilized in this study were collected from the CDC WONDER database. This database compiles death and population data across the United States. For this analysis, we extracted total mortality data spanning from 1999 to 2020. This period was selected to capture the effects of MMLs over a timeframe, which allows for an assessment of long-term trends and changes in overall death rates following the enactment of these laws. The data for unemployement and income were collected from FRED database. We controlled for these variables as previous studies found a relationship between them and drug use. The following table presents the descriptive statistics for our outcome measures by focusing on the death rate (crude mortality) rates across various age groups and states. The first row is the average of death for all age groups per 100000\* people. The second row is the death average for 15-19 per 100000 people. The other rows correspond to progressively older age groups, 20-24, 25-29, 30-34, and 35-39 years. Additionally, categories for 20-40 years and over 40 years are also included.
+
+```{r}
+df_All$Crude_Rate15_19 <- (df_All$Deaths_15_19 / df_All$Population_15_19) * 100000
+df_All$Crude_Rate20_24 <- (df_All$Deaths_20_24 / df_All$Population_20_24) * 100000
+df_All$Crude_Rate25_29 <- (df_All$Deaths_25_29 / df_All$Population_25_29) * 100000
+df_All$Crude_Rate30_34 <- (df_All$Deaths_30_34 / df_All$Population_30_34) * 100000
+df_All$Crude_Rate35_39 <- (df_All$Deaths_35_39 / df_All$Population_35_39) * 100000
+
+
+df_All$Deaths_gt40 <- df_All$Deaths - ( df_All$Deaths_1_4 + df_All$Deaths_5_9 +
+                                          df_All$Deaths_10_14 + df_All$Deaths_15_19 + df_All$Deaths_20_24 +
+                                          df_All$Deaths_25_29 + df_All$Deaths_30_34 + df_All$Deaths_35_39)
+df_All$Population_gt40 <- df_All$Population - ( df_All$Population_1_4 +
+                                                  df_All$Population_5_9 + df_All$Population_10_14 +
+                                                  df_All$Population_15_19 + df_All$Population_20_24 +
+                                                  df_All$Population_25_29 + df_All$Population_30_34 +
+                                                  df_All$Population_35_39)
+df_All$Crude_Rate_gt40 <- (df_All$Deaths_gt40 / df_All$Population_gt40) * 100000
+
+df_All$Deaths_20_40 <- df_All$Deaths_20_24 + df_All$Deaths_25_29 + df_All$Deaths_30_34 + df_All$Deaths_35_39
+df_All$Population_20_40 <- df_All$Population_20_24 + df_All$Population_25_29 + df_All$Population_30_34 + df_All$Population_35_39
+df_All$Crude_Rate_20_40 <- (df_All$Deaths_20_40 / df_All$Population_20_40) * 100000
+
+
+library(dplyr)
+DF_Descriptive_1 <- df_All[, c('Year','State Code','Crude Rate', 'Crude Rate_15_19', 'Crude Rate_20_24', 'Crude Rate_25_29', 'Crude Rate_30_34',
+                               'Crude Rate_35_39', 'Crude_Rate_20_40', 'Crude_Rate_gt40')]
+rownames(DF_Descriptive_1) <- NULL
+numeric_cols <- DF_Descriptive_1[sapply(DF_Descriptive_1, is.numeric)]
+DF_Descriptive_mean_1 <- aggregate(. ~ `State Code`, data = numeric_cols, FUN = mean, na.rm = TRUE)
+DF_Descriptive_mean_1 <- DF_Descriptive_mean_1[, -c(1, ncol(DF_Descriptive_mean_1))]
+DF_Descriptive_mean_2 <- data.frame(colMeans(DF_Descriptive_mean_1))
+DF_Descriptive_std_2 <- data.frame(apply(DF_Descriptive_mean_1, 2, sd))
+colnames(DF_Descriptive_mean_2) <- c('Mean')
+colnames(DF_Descriptive_std_2) <- c('STD')
+DF_Descriptive <- data.frame(Mean = DF_Descriptive_mean_2$Mean, STD = DF_Descriptive_std_2$STD)
+print(DF_Descriptive)
+
+```
+
+# Empirical strategy
+
+We utilized difference-in-differences (DiD) approach which compares the changes in outcomes over time between a treatment group (states with MMLs) and a control group (states without MMLs). This method allows us to control for both time and year fixed effects and unobserved heterogeneity between treated and control groups which can isolates the effect of MMLs on death rates across the United States.
+
+Our main assumption is that in the absence of MMLs, both treated and control groups would have followed the same path. Additionally, we also assumed that one state's adoption of MMLs is not directly affected by death rates in another state.
+
+# Results
+
+```{r}
+
+df_All$Deaths_gt40 <- df_All$Deaths - ( df_All$Deaths_1_4 + df_All$Deaths_5_9 +
+                                          df_All$Deaths_10_14 + df_All$Deaths_15_19 + df_All$Deaths_20_24 +
+                                          df_All$Deaths_25_29 + df_All$Deaths_30_34 + df_All$Deaths_35_39)
+df_All$Population_gt40 <- df_All$Population - ( df_All$Population_1_4 +
+                                                  df_All$Population_5_9 + df_All$Population_10_14 +
+                                                  df_All$Population_15_19 + df_All$Population_20_24 +
+                                                  df_All$Population_25_29 + df_All$Population_30_34 +
+                                                  df_All$Population_35_39)
+df_All$Crude_Rate_gt40 <- (df_All$Deaths_gt40 / df_All$Population_gt40) * 100000
+
+df_All$Deaths_20_40 <- df_All$Deaths_20_24 + df_All$Deaths_25_29 + df_All$Deaths_30_34 + df_All$Deaths_35_39
+df_All$Population_20_40 <- df_All$Population_20_24 + df_All$Population_25_29 + df_All$Population_30_34 + df_All$Population_35_39
+df_All$Crude_Rate_20_40 <- (df_All$Deaths_20_40 / df_All$Population_20_40) * 100000
+
+
+library(dplyr)
+DF_Descriptive_1 <- df_All[, c('Year','State Code','Crude Rate', 'Crude Rate_15_19', 'Crude Rate_20_24', 'Crude Rate_25_29', 'Crude Rate_30_34',
+                               'Crude Rate_35_39', 'Crude_Rate_20_40', 'Crude_Rate_gt40')]
+rownames(DF_Descriptive_1) <- NULL
+numeric_cols <- DF_Descriptive_1[sapply(DF_Descriptive_1, is.numeric)]
+DF_Descriptive_mean_1 <- aggregate(. ~ `State Code`, data = numeric_cols, FUN = mean, na.rm = TRUE)
+DF_Descriptive_mean_1 <- DF_Descriptive_mean_1[, -c(1, ncol(DF_Descriptive_mean_1))]
+DF_Descriptive_mean_2 <- data.frame(colMeans(DF_Descriptive_mean_1))
+DF_Descriptive_std_2 <- data.frame(apply(DF_Descriptive_mean_1, 2, sd))
+colnames(DF_Descriptive_mean_2) <- c('Mean')
+colnames(DF_Descriptive_std_2) <- c('STD')
+DF_Descriptive <- data.frame(Mean = DF_Descriptive_mean_2$Mean, STD = DF_Descriptive_std_2$STD)
+print(DF_Descriptive)
+
+
+ALL_AGE <- df_All[, c('State','State Code','Year','Year Code', 'Deaths', 'Population', 'Crude Rate', 'year_effect')]
+AGE_15_19 <- df_All[, c('State','State Code','Year','Year Code_15_19', 'Deaths_15_19', 'Population_15_19', 'Crude Rate_15_19', 'year_effect_15_19')]
+AGE_15_19$`Crude Rate_15_19` <- as.numeric(as.character(AGE_15_19$`Crude Rate_15_19`))
+AGE_20_24 <- df_All[, c('State','State Code','Year','Year Code_20_24', 'Deaths_20_24', 'Population_20_24', 'Crude Rate_20_24', 'year_effect_20_24')]
+AGE_25_29 <- df_All[, c('State','State Code','Year','Year Code_25_29', 'Deaths_25_29', 'Population_25_29', 'Crude Rate_25_29', 'year_effect_25_29')]
+AGE_30_34 <- df_All[, c('State','State Code','Year','Year Code_30_34', 'Deaths_30_34', 'Population_30_34', 'Crude Rate_30_34', 'year_effect_30_34')]
+AGE_35_39 <- df_All[, c('State','State Code','Year','Year Code_35_39', 'Deaths_35_39', 'Population_35_39', 'Crude Rate_35_39', 'year_effect_35_39')]
+AGE_20_40 <- df_All[, c('State','State Code','Year','Crude_Rate_20_40', 'Deaths_20_40', 'Population_20_40', 'Crude_Rate_20_40', 'year_effect_35_39')]
+AGE_more40 <- df_All[,c('State','State Code','Year','Crude_Rate_gt40', 'Deaths_gt40', 'Population_gt40', 'Crude_Rate_gt40', 'year_effect')]
+
+
+library(dplyr)
+assign_type <- function(year_effect) {
+  ifelse(year_effect >= 2004 & year_effect <= 2015, 2,
+         ifelse(year_effect < 2004, 1, 3))}
+
+ALL_AGE$type <- assign_type(ALL_AGE$year_effect)
+AGE_15_19$type <- assign_type(AGE_15_19$year_effect_15_19)
+AGE_20_24$type <- assign_type(AGE_20_24$year_effect_20_24)
+AGE_25_29$type <- assign_type(AGE_25_29$year_effect_25_29)
+AGE_30_34$type <- assign_type(AGE_30_34$year_effect_30_34)
+AGE_35_39$type <- assign_type(AGE_35_39$year_effect_35_39)
+AGE_20_40$type <- assign_type(AGE_20_40$year_effect_35_39)
+AGE_more40$type <- assign_type(AGE_more40$year_effect)
+
+
+names(AGE_15_19)[names(AGE_15_19) == "year_effect_15_19"] <- "year_effect"
+names(AGE_20_24)[names(AGE_20_24) == "year_effect_20_24"] <- "year_effect"
+names(AGE_25_29)[names(AGE_25_29) == "year_effect_25_29"] <- "year_effect"
+names(AGE_30_34)[names(AGE_30_34) == "year_effect_30_34"] <- "year_effect"
+names(AGE_35_39)[names(AGE_35_39) == "year_effect_35_39"] <- "year_effect"
+names(AGE_20_40)[names(AGE_20_40) == "year_effect_35_39"] <- "year_effect"
+
+
+library(dplyr)
+library(tidyr)
+
+filter_years <- function(group) {
+  effect_year <- group$year_effect[1]
+  return(group %>% filter(Year >= effect_year - 5 & Year <= effect_year + 5))}
+
+select_random_years <- function(group) {
+  random_years <- sample(2004:2015, 11)
+  return(group %>% filter(Year %in% random_years))}
+
+
+ALL_AGE_treated <- ALL_AGE[ALL_AGE$type == 2, ]
+filtered_ALL_AGE_treated <- do.call(rbind, by(ALL_AGE_treated, ALL_AGE_treated$State, filter_years))
+filtered_ALL_AGE_treated$rank <- filtered_ALL_AGE_treated$Year - filtered_ALL_AGE_treated$year_effect
+
+ALL_AGE_treated_mean <- filtered_ALL_AGE_treated %>%
+  group_by(rank) %>%
+  summarise(across(where(is.numeric), ~ mean(., na.rm = TRUE)))
+
+AGE_15_19_treated <- AGE_15_19[AGE_15_19$type == 2, ]
+filtered_AGE_15_19_treated <- do.call(rbind, by(AGE_15_19_treated, AGE_15_19_treated$State, filter_years))
+filtered_AGE_15_19_treated$rank <- filtered_AGE_15_19_treated$Year - filtered_AGE_15_19_treated$year_effect
+filtered_AGE_15_19_treated$`Crude Rate_15_19` <- as.numeric(as.character(filtered_AGE_15_19_treated$`Crude Rate_15_19`))
+AGE_15_19_treated_mean <- filtered_AGE_15_19_treated %>%
+  group_by(rank) %>%
+  summarise(across(where(is.numeric), ~mean(., na.rm = TRUE)))
+
+AGE_20_24_treated <- AGE_20_24[AGE_20_24$type == 2, ]
+filtered_AGE_20_24_treated <- do.call(rbind, by(AGE_20_24_treated, AGE_20_24_treated$State, filter_years))
+filtered_AGE_20_24_treated$rank <- filtered_AGE_20_24_treated$Year - filtered_AGE_20_24_treated$year_effect
+AGE_20_24_treated_mean <- filtered_AGE_20_24_treated %>%
+  group_by(rank) %>%
+  summarise(across(where(is.numeric), mean, na.rm = TRUE))
+
+AGE_25_29_treated <- AGE_25_29[AGE_25_29$type == 2, ]
+filtered_AGE_25_29_treated <- do.call(rbind, by(AGE_25_29_treated, AGE_25_29_treated$State, filter_years))
+filtered_AGE_25_29_treated$rank <- filtered_AGE_25_29_treated$Year - filtered_AGE_25_29_treated$year_effect
+AGE_25_29_treated_mean <- filtered_AGE_25_29_treated %>%
+  group_by(rank) %>%
+  summarise(across(where(is.numeric), mean, na.rm = TRUE))
+
+AGE_30_34_treated <- AGE_30_34[AGE_30_34$type == 2, ]
+filtered_AGE_30_34_treated <- do.call(rbind, by(AGE_30_34_treated, AGE_30_34_treated$State, filter_years))
+filtered_AGE_30_34_treated$rank <- filtered_AGE_30_34_treated$Year - filtered_AGE_30_34_treated$year_effect
+AGE_30_34_treated_mean <- filtered_AGE_30_34_treated %>%
+  group_by(rank) %>%
+  summarise(across(where(is.numeric), mean, na.rm = TRUE))
+
+AGE_35_39_treated <- AGE_35_39[AGE_35_39$type == 2, ]
+filtered_AGE_35_39_treated <- do.call(rbind, by(AGE_35_39_treated, AGE_35_39_treated$State, filter_years))
+filtered_AGE_35_39_treated$rank <- filtered_AGE_35_39_treated$Year - filtered_AGE_35_39_treated$year_effect
+AGE_35_39_treated_mean <- filtered_AGE_35_39_treated %>%
+  group_by(rank) %>%
+  summarise(across(where(is.numeric), mean, na.rm = TRUE))
+
+AGE_20_40_treated <- AGE_20_40[AGE_20_40$type == 2, ]
+filtered_AGE_20_40_treated <- do.call(rbind, by(AGE_20_40_treated, AGE_20_40_treated$State, filter_years))
+filtered_AGE_20_40_treated$rank <- filtered_AGE_20_40_treated$Year - filtered_AGE_20_40_treated$year_effect
+AGE_20_40_treated_mean <- filtered_AGE_20_40_treated %>%
+  group_by(rank) %>%
+  summarise(across(where(is.numeric), mean, na.rm = TRUE))
+
+AGE_more40_treated <- AGE_more40[AGE_more40$type == 2, ]
+filtered_AGE_more40_treated <- do.call(rbind, by(AGE_more40_treated, AGE_more40_treated$State, filter_years))
+filtered_AGE_more40_treated$rank <- filtered_AGE_more40_treated$Year - filtered_AGE_more40_treated$year_effect
+AGE_more40_treated_mean <- filtered_AGE_more40_treated %>%
+  group_by(rank) %>%
+  summarise(across(where(is.numeric), mean, na.rm = TRUE))
+
+
+
+ALL_AGE_control <- ALL_AGE[ALL_AGE$type == 3, ]
+filtered_ALL_AGE_control <- do.call(rbind, by(ALL_AGE_control, ALL_AGE_control$State, select_random_years))
+filtered_ALL_AGE_control <- filtered_ALL_AGE_control %>%
+  arrange(State, Year) %>%
+  group_by(State) %>%
+  mutate(rank = row_number() - 6) %>%  
+  ungroup()
+ALL_AGE_control_mean <- filtered_ALL_AGE_control %>%
+  group_by(rank) %>%
+  summarise(across(where(is.numeric), mean, na.rm = TRUE))
+
+AGE_15_19_control <- AGE_15_19[AGE_15_19$type == 3, ]
+filtered_AGE_15_19_control <- do.call(rbind, by(AGE_15_19_control, AGE_15_19_control$State, select_random_years))
+filtered_AGE_15_19_control <- filtered_AGE_15_19_control %>%
+  arrange(State, Year) %>%
+  group_by(State) %>%
+  mutate(rank = row_number() - 6) %>%  
+  ungroup()
+filtered_AGE_15_19_control$`Crude Rate_15_19` <- as.numeric(as.character(filtered_AGE_15_19_control$`Crude Rate_15_19`))
+AGE_15_19_control_mean <- filtered_AGE_15_19_control %>%
+  group_by(rank) %>%
+  summarise(across(where(is.numeric), mean, na.rm = TRUE))
+
+AGE_20_24_control <- AGE_20_24[AGE_20_24$type == 3, ]
+filtered_AGE_20_24_control <- do.call(rbind, by(AGE_20_24_control, AGE_20_24_control$State, select_random_years))
+filtered_AGE_20_24_control <- filtered_AGE_20_24_control %>%
+  arrange(State, Year) %>%
+  group_by(State) %>%
+  mutate(rank = row_number() - 6) %>%  
+  ungroup()
+AGE_20_24_control_mean <- filtered_AGE_20_24_control %>%
+  group_by(rank) %>%
+  summarise(across(where(is.numeric), mean, na.rm = TRUE))
+
+AGE_25_29_control <- AGE_25_29[AGE_25_29$type == 3, ]
+filtered_AGE_25_29_control <- do.call(rbind, by(AGE_25_29_control, AGE_25_29_control$State, select_random_years))
+filtered_AGE_25_29_control <- filtered_AGE_25_29_control %>%
+  arrange(State, Year) %>%
+  group_by(State) %>%
+  mutate(rank = row_number() - 6) %>%  
+  ungroup()
+AGE_25_29_control_mean <- filtered_AGE_25_29_control %>%
+  group_by(rank) %>%
+  summarise(across(where(is.numeric), mean, na.rm = TRUE))
+
+AGE_30_34_control <- AGE_30_34[AGE_30_34$type == 3, ]
+filtered_AGE_30_34_control <- do.call(rbind, by(AGE_30_34_control, AGE_30_34_control$State, select_random_years))
+filtered_AGE_30_34_control <- filtered_AGE_30_34_control %>%
+  arrange(State, Year) %>%
+  group_by(State) %>%
+  mutate(rank = row_number() - 6) %>%  
+  ungroup()
+AGE_30_34_control_mean <- filtered_AGE_30_34_control %>%
+  group_by(rank) %>%
+  summarise(across(where(is.numeric), mean, na.rm = TRUE))
+
+AGE_35_39_control <- AGE_35_39[AGE_35_39$type == 3, ]
+filtered_AGE_35_39_control <- do.call(rbind, by(AGE_35_39_control, AGE_35_39_control$State, select_random_years))
+filtered_AGE_35_39_control <- filtered_AGE_35_39_control %>%
+  arrange(State, Year) %>%
+  group_by(State) %>%
+  mutate(rank = row_number() - 6) %>%  
+  ungroup()
+AGE_35_39_control_mean <- filtered_AGE_35_39_control %>%
+  group_by(rank) %>%
+  summarise(across(where(is.numeric), mean, na.rm = TRUE))
+
+AGE_20_40_control <- AGE_20_40[AGE_20_40$type == 3, ]
+filtered_AGE_20_40_control <- do.call(rbind, by(AGE_20_40_control, AGE_20_40_control$State, select_random_years))
+filtered_AGE_20_40_control <- filtered_AGE_20_40_control %>%
+  arrange(State, Year) %>%
+  group_by(State) %>%
+  mutate(rank = row_number() - 6) %>%  
+  ungroup()
+AGE_20_40_control_mean <- filtered_AGE_20_40_control %>%
+  group_by(rank) %>%
+  summarise(across(where(is.numeric), mean, na.rm = TRUE))
+
+AGE_more40_control <- AGE_more40[AGE_more40$type == 3, ]
+filtered_AGE_more40_control <- do.call(rbind, by(AGE_more40_control, AGE_more40_control$State, select_random_years))
+filtered_AGE_more40_control <- filtered_AGE_more40_control %>%
+  arrange(State, Year) %>%
+  group_by(State) %>%
+  mutate(rank = row_number() - 6) %>%  
+  ungroup()
+AGE_more40_control_mean <- filtered_AGE_more40_control %>%
+  group_by(rank) %>%
+  summarise(across(where(is.numeric), mean, na.rm = TRUE))
+
+ALL_AGE_mean <- data.frame(
+  Crude_Rate_treated = ALL_AGE_treated_mean$`Crude Rate`,
+  Crude_Rate_control = ALL_AGE_control_mean$`Crude Rate`,
+  rank = ALL_AGE_treated_mean$`rank`)
+
+AGE_15_19_mean <- data.frame(
+  Crude_Rate_treated_15_19 = AGE_15_19_treated_mean$`Crude Rate_15_19`,
+  Crude_Rate_control_15_19 = AGE_15_19_control_mean$`Crude Rate_15_19`,
+  rank = AGE_15_19_treated_mean$`rank`)
+
+AGE_20_24_mean <- data.frame(
+  Crude_Rate_treated_20_24 = AGE_20_24_treated_mean$`Crude Rate_20_24`,
+  Crude_Rate_control_20_24 = AGE_20_24_control_mean$`Crude Rate_20_24`,
+  rank = AGE_20_24_treated_mean$`rank`)
+
+AGE_25_29_mean <- data.frame(
+  Crude_Rate_treated_25_29 = AGE_25_29_treated_mean$`Crude Rate_25_29`,
+  Crude_Rate_control_25_29 = AGE_25_29_control_mean$`Crude Rate_25_29`,
+  rank = AGE_25_29_treated_mean$`rank`)
+
+AGE_30_34_mean <- data.frame(
+  Crude_Rate_treated_30_34 = AGE_30_34_treated_mean$`Crude Rate_30_34`,
+  Crude_Rate_control_30_34 = AGE_30_34_control_mean$`Crude Rate_30_34`,
+  rank = AGE_30_34_treated_mean$`rank`)
+
+AGE_35_39_mean <- data.frame(
+  Crude_Rate_treated_35_39 = AGE_35_39_treated_mean$`Crude Rate_35_39`,
+  Crude_Rate_control_35_39 = AGE_35_39_control_mean$`Crude Rate_35_39`,
+  rank = AGE_35_39_treated_mean$`rank`)
+
+AGE_20_40_mean <- data.frame(
+  Crude_Rate_treated_20_40 = AGE_20_40_treated_mean$Crude_Rate_20_40,
+  Crude_Rate_control_20_40 = AGE_20_40_control_mean$Crude_Rate_20_40,
+  rank = AGE_20_40_treated_mean$`rank`)
+
+AGE_more40_mean <- data.frame(
+  Crude_Rate_treated_more40 = AGE_more40_treated_mean$`Crude_Rate_gt40`,
+  Crude_Rate_control_more40 = AGE_more40_control_mean$`Crude_Rate_gt40`,
+  rank = AGE_more40_control_mean$`rank`)
+
+library(tidyverse)
+plot_age_group <- function(data, X, Y, Z) {
+  DF_LONG <- data %>%
+    pivot_longer(
+      cols = c(all_of(X), all_of(Y)), 
+      names_to = "Treatment",
+      values_to = "Crude_Rate"
+    ) %>%
+    mutate(Treatment = recode(Treatment,
+                              !!X := "Treated",  
+                              !!Y := "Control"))  
+  ggplot(DF_LONG, aes(x = rank, y = Crude_Rate, color = Treatment, group = Treatment)) +
+    geom_line() +
+    scale_color_manual(values = c("Treated" = "blue", "Control" = "red")) +
+    labs(x = "Years since legalization",
+         y = "Average crude rate",
+         title = paste("Age group =", Z)) +
+    geom_vline(xintercept = 0, linetype = "dashed", color = "red") +
+    theme_minimal() +
+    theme(legend.title = element_blank()) +
+    guides(color = guide_legend(override.aes = list(linetype = c(1, 1)))) +
+    scale_x_continuous(breaks = min(DF_LONG$rank, na.rm = TRUE):max(DF_LONG$rank, na.rm = TRUE)) +  
+    scale_y_continuous(breaks = pretty(DF_LONG$Crude_Rate, n = 5))
+}
+plot_age_group(ALL_AGE_mean, 'Crude_Rate_treated', 'Crude_Rate_control', "ALL")
+plot_age_group(AGE_15_19_mean, 'Crude_Rate_treated_15_19', 'Crude_Rate_control_15_19', "15_19")
+plot_age_group(AGE_20_24_mean, 'Crude_Rate_treated_20_24', 'Crude_Rate_control_20_24', "20_24")
+plot_age_group(AGE_25_29_mean, 'Crude_Rate_treated_25_29', 'Crude_Rate_control_25_29', "25_29")
+plot_age_group(AGE_30_34_mean, 'Crude_Rate_treated_30_34', 'Crude_Rate_control_30_34', "30_34")
+plot_age_group(AGE_35_39_mean, 'Crude_Rate_treated_35_39', 'Crude_Rate_control_35_39', "35_39")
+plot_age_group(AGE_20_40_mean, 'Crude_Rate_treated_20_40', 'Crude_Rate_control_20_40', "20_40")
+plot_age_group(AGE_more40_mean, 'Crude_Rate_treated_more40', 'Crude_Rate_control_more40', "G_40")
+
+
+```
+
+					
+
+In each figure, the blue line shows the average death rate for the treated states (states with MMLs) and the red line represents the average death rate for the control states (without MMLs). Year 0 on the horizontal axis represents the year in which legalization took place. Control states were randomly assigned a year of legalization between 1999 and 2020.
+
+For all age group figure, we can see both lines show an increase in mortality rates over time. However, the treated group shows a more pronounced increase after legalization compared to the control group. In the group age of 15-19 we can see a decrease in both control and treated group. In the third group (20-24), following MMLs the treated group shows an increase in mortality rates. However, control group shows some variation but without a clear increasing trend. In the age group 25-29, both treated and control group experienced a surge after MMLs but this trend increases more sharply post-legalization in treated group. In 30-34 also there is a difference between states with treated and without treated around the time of MMLs.
+					
+
+```{r}
+library(dplyr)
+perform_regression <- function(data, xm) {data <- data %>%
+  mutate(mml = ifelse(year_effect > Year, 0, 1)) %>%
+  mutate(log_crude = log({{xm}}))
+model <- lm(log_crude ~ mml, data = data)
+return(summary(model))}
+
+ALL_AGE_summary <- perform_regression(ALL_AGE, `Crude Rate`)
+AGE_15_19_summary <- perform_regression(AGE_15_19, `Crude Rate_15_19`)
+AGE_20_24_summary <- perform_regression(AGE_20_24, `Crude Rate_20_24`)
+AGE_25_29_summary <- perform_regression(AGE_25_29, `Crude Rate_25_29`)
+AGE_30_34_summary <- perform_regression(AGE_30_34, `Crude Rate_30_34`)
+AGE_35_39_summary <- perform_regression(AGE_35_39, `Crude Rate_35_39`)
+AGE_20_40_summary <- perform_regression(AGE_20_40, `Crude_Rate_20_40`)
+AGE_more40_summary <- perform_regression(AGE_more40, `Crude_Rate_gt40`)
+
+summary_list <- list(ALL_AGE = ALL_AGE_summary,AGE_15_19 = AGE_15_19_summary,AGE_20_24 = AGE_20_24_summary,AGE_25_29 = AGE_25_29_summary
+                     ,AGE_30_34 = AGE_30_34_summary,AGE_35_39 = AGE_35_39_summary,AGE_20_40 = AGE_20_40_summary,AGE_more40 = AGE_more40_summary)
+coefficients <- numeric(length(summary_list))
+t_values <- numeric(length(summary_list))
+r_squared <- numeric(length(summary_list))
+
+for (i in seq_along(summary_list)) {coefficients[i] <- summary_list[[i]]$coefficients[2, 1]
+t_values[i] <- summary_list[[i]]$coefficients[2, 3]
+r_squared[i] <- summary_list[[i]]$r.squared}
+result_table <- data.frame(MML = coefficients, T_Values = t_values, R_Squared = r_squared)
+
+row.names(result_table) <- c("ALL_AGE", "AGE_15_19", "AGE_20_24", "AGE_25_29","AGE_30_34", "AGE_35_39", "AGE_20_40", "AGE_more40")
+transposed_result_table <- t(result_table)
+print(transposed_result_table)
+
+
+
+```
+
+The above table presents estimates among 8 age groups. The first column represent the all age group and as we can see the coefficient is -0.066 and significant. This means that after MMLs, the death rate decrease significantly. For the second age group which is 20-24 the coefficient is negative and significant and this trend is the same for 20-24, 35-39. The results suggest that MMLs may have a varying impact on mortality rates across age groups. 			
+
+			
+
+```{r}
+library(dplyr)
+df_all_age_2 <- ALL_AGE %>%
+  mutate(mml = ifelse(year_effect > Year, 0, 1)) %>%
+  mutate(filt_year = ifelse(year_effect == Year, 1, 0)) %>%
+  mutate(log_crude = log(`Crude Rate`))
+
+library(dplyr)
+df_all_age_2 <- df_all_age_2 %>%
+  group_by(State) %>%
+  mutate(mml_shifted_3 = lag(mml, 3),
+         mml_shifted_2 = lag(mml, 2),
+         mml_shifted_1 = lag(mml, 1),
+         mml_no_shift = lag(mml, 0),
+         mml_1_shifted = lead(mml, 1),  
+         mml_2_shifted = lead(mml, 2),
+         mml_3_shifted = lead(mml, 3),
+         mml_4_shifted = lead(mml, 4),
+         mml_5_shifted = lead(mml, 5))
+reg1 <- lm(log_crude ~ mml, data = df_all_age_2)
+reg2 <- lm(log_crude ~ mml_shifted_3 + mml_shifted_2 + mml_shifted_1 + mml_no_shift + mml_1_shifted + mml_2_shifted + mml_3_shifted + mml_4_shifted + mml_5_shifted, data = df_all_age_2)
+reg3 <- lm(log_crude ~ mml_no_shift +  mml_1_shifted + mml_2_shifted + mml_3_shifted + mml_4_shifted + mml_5_shifted, data = df_all_age_2)
+reg4 <- lm(log_crude ~ mml + State:Year, data = df_all_age_2)
+reg5 <- lm(log_crude ~ mml_shifted_3 + mml_shifted_2 + mml_shifted_1 + mml_no_shift + mml_1_shifted + mml_2_shifted + mml_3_shifted + mml_4_shifted + mml_5_shifted + State:Year , data = df_all_age_2)
+reg6 <- lm(log_crude ~ mml_no_shift +  mml_1_shifted + mml_2_shifted + mml_3_shifted + mml_4_shifted + mml_5_shifted + State:Year , data = df_all_age_2)
+
+model_names <- c("reg1", "reg2", "reg3", "reg4", "reg5", "reg6")
+reg_models <- list(reg1 , reg2 , reg3 , reg4 , reg5 , reg6)
+results_df_regs <- data.frame(
+  Model = character(), Coefficient = numeric(), T_value = numeric(), R_squared = numeric())
+for (i in 1:length(reg_models)) {
+  model_name <- model_names[i]
+  reg_summary <- summary(reg_models[[i]])
+  coeffs <- coef(reg_summary)
+  t_values <- coeffs[, 3]
+  coefficients <- coeffs[, 1]
+  r_squared <- reg_summary$r.squared
+  model_results <- data.frame(
+    Model = model_name, Coefficient = coefficients, T_value = t_values, R_squared = r_squared)
+  results_df_regs <- rbind(results_df_regs, model_results)}
+print(results_df_regs)
+
+
+
+
+
+```
+
+						
+
+This table presents ordinary least squares (OLS) estimates of the relationship between MMLs and log death rate. The regressions are weighted by the population of state s in year t. The baseline estimate (reg1)
+suggests that legalization leads to a decrease (6.6%) in death rate. In re 2 and 3 , we lag the MML indicator. The MML lags are jointly significant and are, without exception, negative. As we can see, we do not have any significant result. However, in reg 3 we can see that in the year of MMLs (mmm_no_shift) the death rates decrease. In reg 4 we have added State-specific linear time trends. We want to see how the coefficient has changed after controlling for state fix effect. As we can see, after controlling for state fix effect, the coefficient for mml1 is significant and positive. It means there is a difference after MMLs.
+
+```{r}
+library(dplyr)
+df_control_all <- merge(ALL_AGE, control_variables, by = c("State", "Year"), all.x = TRUE) %>%
+  mutate(log_crude = log(`Crude Rate`))
+control_reg1 <- lm(log_crude ~ log_income, data = df_control_all)
+control_reg2 <- lm(log_crude ~ unemployement, data = df_control_all)
+control_reg3 <- lm(log_crude ~ log_income + unemployement, data = df_control_all)
+
+control_reg_models <- list(control_reg1 , control_reg2 , control_reg3)
+control_df_regs <- data.frame( Model = character(), Coefficient = numeric(), T_value = numeric(), R_squared = numeric())
+for (i in 1:length(control_reg_models)) {
+  model_name <- paste("control_reg", i, sep = "")
+  reg_summary <- summary(control_reg_models[[i]])
+  coeffs <- coef(reg_summary)
+  t_values <- coeffs[, 3]
+  coefficients <- coeffs[, 1]
+  r_squared <- reg_summary$r.squared
+  model_results <- data.frame( Model = model_name, Coefficient = coefficients, T_value = t_values, R_squared = r_squared)
+  control_df_regs <- rbind(control_df_regs, model_results)}
+print(control_df_regs)
+
+```
+
+Finally in this table we examined whether the control variables(income and unemployment), predict the possage of MMLs. In the first model, we controlled for log income which was negative and significant. In the second model we controlled for unemployement which was not significant. In the third model we controlled for the both at the same time.
+
+# conclusion
+
+This study provides a comprehensive view of how MMLs influence overall death rates. While previoyus studies have provided great insights, their finding is fragmented due to focus on specific areas. This paper closes this gap by providing a holistic view. Using a difference-in-differences analysis, our findings suggest that although there was a decrease in mortality rates in both states with and without MMLs, the reduction in mortality was more pronounced in states that implemented MMLs. This implies that while general trends indicate a decrease in death rates across the states, MMLs may have had an additional impact that further drove down the number of deaths in those states beyond what was observed in states without such laws. This can show the positive public health implications of MMLs, but it would be important to control for other variables and factors that may also influence mortality rates to assert this conclusion with greater certainty.
+
+# References
+
+1.     Anderson, D. M., Rees, D. I., & Sabia, J. J. (2014). Medical marijuana laws and suicides by gender and age. American Journal of Public Health, 104(12), 2369-2376.
+
+2.     Powell, D., Pacula, R. L., & Jacobson, M. (2018). Do medical marijuana laws reduce addictions and deaths related to pain killers?. Journal of Health Economics, 58, 29-42.
+
+3.     Franz, C. A., & Frishman, W. H. (2016). Marijuana use and cardiovascular disease. Cardiology in Review, 24(4), 158-162.
+
+4.     Kalbfuß, J., Odermatt, R., & Stutzer, A. (2018). Medical marijuana laws and mental health in the United States.
+
+5.     Morris, R. G., TenEyck, M., Barnes, J. C., & Kovandzic, T. V. (2014). The effect of medical marijuana laws on crime: evidence from state panel data, 1990-2006. *PloS one*, *9*(3), e92816.
+
+6.     Chihuri, S., & Li, G. (2019). State marijuana laws and opioid overdose mortality. Injury epidemiology, 6(1), 1-12.
+
+7.     Kim, J. H., Santaella-Tenorio, J., Mauro, C., Wrobel, J., Cerdà, M., Keyes, K. M., ... & Li, G. (2016). State medical marijuana laws and the prevalence of opioids detected among fatally injured drivers. American journal of public health, 106(11), 2032-2037.
+
+8.     Alcocer, J. J. (2020). Exploring the effect of Colorado's recreational marijuana policy on opioid overdose rates. Public health, 185, 8-14.
+
+9.     Cook, A. C., Leung, G., & Smith, R. A. (2020). Marijuana decriminalization, medical marijuana laws, and fatal traffic crashes in US cities, 2010–2017. American journal of public health, 110(3), 363-369.
+
+10.  Bartos, B. J., Newark, C., & McCleary, R. (2020). Marijuana medicalization and motor vehicle fatalities: a synthetic control group approach. Journal of experimental criminology, 16, 247-264.
+
+11.  Els, C., Jackson, T. D., Tsuyuki, R. T., Aidoo, H., Wyatt, G., Sowah, D., ... & Straube, S. (2019). Impact of cannabis use on road traffic collisions and safety at work: systematic review and meta-analysis. Canadian Journal of Addiction, 10(1), 8-15.
+
+12.  Bartos, B. J., Kubrin, C. E., Newark, C., & McCleary, R. (2019). Medical marijuana laws and suicide. Archives of suicide research.
+
+13.  Henkel, D. (2011). Unemployment and substance use: a review of the literature (1990-2010). *Current drug abuse reviews*, *4*(1), 4-27.
