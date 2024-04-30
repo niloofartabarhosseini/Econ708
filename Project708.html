@@ -1,0 +1,1168 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.450">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>The effect of MMLs on Death Rate</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="Project708_files/libs/clipboard/clipboard.min.js"></script>
+<script src="Project708_files/libs/quarto-html/quarto.js"></script>
+<script src="Project708_files/libs/quarto-html/popper.min.js"></script>
+<script src="Project708_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="Project708_files/libs/quarto-html/anchor.min.js"></script>
+<link href="Project708_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="Project708_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="Project708_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="Project708_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="Project708_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">The effect of MMLs on Death Rate</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
+<p>Marijuana is one of the most used illicit substances in the world. Over the past few decades, marijuana legislation has changed in the United States and some states have adopted medical marijuana laws (MMLs). MMLs remove state-level penalties for using, possessing, and cultivating medical marijuana (Anderson, Hansen, Rees, 2013). Hence, it has received attention not only due to changes in access but also because of the potential effects on public health.</p>
+<p>A growing number of studies have focused on the potential outcomes of MMLs. &nbsp;Among the most critical outcomes are mortality rates across different causes of death, such as those related to drug overdoses (e.g.&nbsp;Chihuri, &amp; Li, 2019; Powell, Pacula, &amp; Jacobson, 2018; Kim et al., 2016), traffic accidents (e.g.&nbsp;Anderson, Hansen, Rees, 2013; Bartos, Newark, &amp; McCleary, 2020; Els et al., 2020), suicides (e.g.&nbsp;Anderson, Rees, &amp; Sabia, 2014; Bartos et al, 2019), diseases (e.g.&nbsp;Franz, &amp; Frishman, 2016) and criminal activity (e.g.&nbsp;Adams 2008; Blankstein 2010; Morris et al., 2014). However, these studies have been fragmented across different disciplines with inconsistent findings which complicate our understandings of MMLs actual impact.</p>
+<p>Moreover, the effects of MMLs on mortality are complex and can involve complex interactions that are not captured when only single categories of death are considered. For instance, MMLs can influence alcohol consumption (Anderson, Rees, &amp; Sabia, 2014), mental health (Kalbfuß, Odermatt, &amp; Stutzer, 2018), and crime rates, which all of them may have interconnected effects on mortality. This underscores the necessity for a comprehensive analysis that considers the aggregate impact of MMLs on all categories of mortality.</p>
+<p>To address this gap, this paper provides a comprehensive view of how MMLs influence overall mortality rates. By using the CDC WONDER database, we analyze mortality data from 1999 to 2020. We employ a difference-in-differences approach which allows us to control for both time and year fixed effects and unobserved heterogeneity between treatment and control groups which in turn isolates the effect of MMLs on mortality rates across the United States. We find that although there was a decrease in mortality rates in both states with and without MMLs, the reduction in mortality was more pronounced in states that implemented MMLs</p>
+<p>The findings of this study benefit policy makers by providing a clear picture of the overall impact of MMLs. While studies of specific outcomes are valuable, a holistic view of the effect of MMLs on total mortality is crucial for informed policy decisions that consider all potential public health impacts.</p>
+<p>The rest of the paper is organized as follows: first, we begin with a brief review of the relevant literature, develop hypotheses and describe our empirical context. Then, we conclude.</p>
+</section>
+<section id="literature-review" class="level1">
+<h1>Literature Review</h1>
+<p>The relationship between MMLs and death rate outcomes has been studied in various areas yet remains a complex field with inconsistent findings across different areas of mortality.</p>
+<p>A significant body of research has explored the impact of MMLs on opioid overdoses. For example, study by Kim et al.&nbsp;(2016) found results that are different by age. While they found a reduction in opioid positivity for most states after the implementation of an operational MML, these estimates were not significant. However, a significant reduction in opioid positivity was found among aged 21 to 40. This finding suggests that the effectiveness of MMLs may be more pronounced in some demographic groups, maybe due to the greater consumption of medical marijuana among younger adults.</p>
+<p>In a similar vein, Powell, Pacula, and Jacobson (2018) showed that MMLs are associated with reductions in opioid overdose deaths as patients opt for marijuana over opioids for pain management. This suggests that MMLs may play a critical role in addressing the opioid crisis. Their research supports the hypothesis that easier access to medical marijuana can lead to decreased reliance on opioids, and consequently reduce the rates of deaths by overdose.</p>
+<p>However, the systematic review by Chihuri and Li (2019) presents a more complex picture. It shows that the impact of MMLs on opioid overdose mortality is not statistically significant across all studies. While some reports within the review noted decreases in opioid-related deaths, others found no significant changes or even increases.</p>
+<p>Following the opioid overdose discussions, another critical area influenced by MMLs is traffic fatality. For example, Anderson, Hansen, and Rees (2013) explored MMLs impact on traffic fatality. Their findings suggest that the introduction of medical marijuana laws leads to a reduction in traffic fatalities, especially those involving alcohol. Following on Anderson’s et al findings, Bartos, Newark, and McCleary (2020) investigated the issue with another methodological approach. They find a large decrease in statewide motor vehicle fatalities in California after the enactment of its MML. However, the study by Els et al (2019) indicates a contrasting finding. By conducting a systematic review and meta-analysis that assessed the impact of cannabis use on road traffic collisions and including 11 studies, they found that the presence of cannabis significantly increased the risk of road traffic fatalities.</p>
+<p>Another stream of studies has focused on the impact of MMLs on suicide. For instance, study by Anderson, Rees, &amp; Sabia (2014) investigated the association between the legalization of medical marijuana and suicide rates and found that while the overall association between medical marijuana legalization and suicide was not statistically significant, there were reductions in suicide rates among specific age group. Their findings suggest a potential protective effect of medical marijuana legalization on younger men, which can be attributed to marijuana’s use as a coping mechanism for stress or mental health issues. Additionally, Bartos et al (2019) provides further evidence of the impact of medical marijuana laws on suicide rates. They found statistically significant reductions in total suicides and gun-related suicides in California after the enactment of medical marijuana legislation.</p>
+<p>The review by Franz and Frishman (2016) delves into the impact of MMLs on cardiovascular disease. Their findings show increased risks of heart-related issues after marijuana consumption which may even exacerbate conditions in individuals who have pre-existing heart diseases. However, longitudinal studies have not shown a significant long-term impact on mortality from cardiovascular causes. In addition, the study by Abouk and Adams (2018) investigated the association between MMLs and cardiovascular deaths. They found that after the MMLs, there was a statistically significant increase in the rate of cardiac deaths among older adults and These increases were even higher in states with less controls on marijuana dispensing which suggests that the broader accessibility of cannabis may lead to increased cardiovascular risks among the most vulnerable older populations.</p>
+<p>While the existing literature provides insights into the effects of MMLs on various mortality outcomes, they have focused on specific causes of death. That is,&nbsp; these studies often isolates the effects of MMLs on opioid overdoses, traffic fatalities, suicides, and cardiovascular diseases. They have offered valuable but fragmented findings. This study seeks to bridge these gaps by conducting a comprehensive analysis of the overall impact of MMLs on all-cause mortality rates across the United States. Building on previous studies which mostly find negative relationship(there are some exceptions), we hypothesize that MMLs decrease the death rate in overall:<br>
+Hypothesis 1: All-else equal, Compared to states without MMLs, states with MMLs experience a decrease in death rate.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>excel_file <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"/Users/niloofartabarhosseini/Desktop/Data_01.xlsx"</span>, <span class="at">sheet =</span> <span class="st">'all'</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>control_variables <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"/Users/niloofartabarhosseini/Desktop/Income_Unemployement.xlsx"</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>df_All <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"/Users/niloofartabarhosseini/Desktop/Data_01.xlsx"</span>, <span class="at">sheet =</span> <span class="st">"all"</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">#df_Less1 &lt;- read_excel("/Users/niloofartabarhosseini/Desktop/Data_01.xlsx", sheet = "&lt;1")</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">#df_Less1_cleaned &lt;- df_Less1 %&gt;%</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">#  filter(!if_any(everything(), ~ .x == 'Unreliable'))</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>df_1_4 <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"/Users/niloofartabarhosseini/Desktop/Data_01.xlsx"</span>, <span class="at">sheet =</span> <span class="st">'1-4'</span>)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">#df_1_4_cleaned &lt;- df_1_4 %&gt;%</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co">#  filter(!if_any(everything(), ~ .x == 'Unreliable'))</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>df_5_9 <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"/Users/niloofartabarhosseini/Desktop/Data_01.xlsx"</span>, <span class="at">sheet =</span> <span class="st">'5-9'</span>)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co">#df_5_9_cleaned &lt;- df_5_9 %&gt;%</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co">#  filter(!if_any(everything(), ~ .x == 'Unreliable'))</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>df_10_14 <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"/Users/niloofartabarhosseini/Desktop/Data_01.xlsx"</span>, <span class="at">sheet =</span> <span class="st">'10-14'</span>)</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co">#df_10_14_cleaned &lt;- df_10_14 %&gt;%</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co">#  filter(!if_any(everything(), ~ .x == 'Unreliable'))</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>df_15_19 <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"/Users/niloofartabarhosseini/Desktop/Data_01.xlsx"</span>, <span class="at">sheet =</span> <span class="st">'15-19'</span>)</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="co">#df_15_19_cleaned &lt;- df_15_19 %&gt;%</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="co">#  filter(!if_any(everything(), ~ .x == 'Unreliable'))</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>df_20_24 <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"/Users/niloofartabarhosseini/Desktop/Data_01.xlsx"</span>, <span class="at">sheet =</span> <span class="st">'20-24'</span>)</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="co">#df_20_24_cleaned &lt;- df_20_24 %&gt;%</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="co">#  filter(!if_any(everything(), ~ .x == 'Unreliable'))</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>df_25_29 <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"/Users/niloofartabarhosseini/Desktop/Data_01.xlsx"</span>, <span class="at">sheet =</span> <span class="st">'25-29'</span>)</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="co">#df_25_29_cleaned &lt;- df_25_29 %&gt;%</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="co">#  filter(!if_any(everything(), ~ .x == 'Unreliable'))</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>df_30_34 <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"/Users/niloofartabarhosseini/Desktop/Data_01.xlsx"</span>, <span class="at">sheet =</span> <span class="st">'30-34'</span>)</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="co">#df_30_34_cleaned &lt;- df_30_34 %&gt;%</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="co">#  filter(!if_any(everything(), ~ .x == 'Unreliable'))</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>df_35_39 <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"/Users/niloofartabarhosseini/Desktop/Data_01.xlsx"</span>, <span class="at">sheet =</span> <span class="st">'35-39'</span>)</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>df_Dates <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(<span class="st">"/Users/niloofartabarhosseini/Desktop/Data_01.xlsx"</span>, <span class="at">sheet =</span> <span class="st">'DATES'</span>)</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>df_All <span class="ot">&lt;-</span> df_All[<span class="sc">!</span><span class="fu">grepl</span>(<span class="st">"^</span><span class="sc">\\</span><span class="st">s*Total</span><span class="sc">\\</span><span class="st">s*$"</span>, df_All<span class="sc">$</span>Notes, <span class="at">ignore.case =</span> <span class="cn">TRUE</span>), ]</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a><span class="co">#df_Less1 &lt;- df_Less1[df_Less1$Notes != 'Total', ]</span></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>df_1_4 <span class="ot">&lt;-</span> df_1_4[<span class="sc">!</span><span class="fu">grepl</span>(<span class="st">"^</span><span class="sc">\\</span><span class="st">s*Total</span><span class="sc">\\</span><span class="st">s*$"</span>, df_1_4<span class="sc">$</span>Notes, <span class="at">ignore.case =</span> <span class="cn">TRUE</span>), ]</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>df_5_9 <span class="ot">&lt;-</span> df_5_9[<span class="sc">!</span><span class="fu">grepl</span>(<span class="st">"^</span><span class="sc">\\</span><span class="st">s*Total</span><span class="sc">\\</span><span class="st">s*$"</span>, df_5_9<span class="sc">$</span>Notes, <span class="at">ignore.case =</span> <span class="cn">TRUE</span>), ]</span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>df_10_14 <span class="ot">&lt;-</span> df_10_14[<span class="sc">!</span><span class="fu">grepl</span>(<span class="st">"^</span><span class="sc">\\</span><span class="st">s*Total</span><span class="sc">\\</span><span class="st">s*$"</span>, df_10_14<span class="sc">$</span>Notes, <span class="at">ignore.case =</span> <span class="cn">TRUE</span>), ]</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>df_15_19 <span class="ot">&lt;-</span> df_15_19[<span class="sc">!</span><span class="fu">grepl</span>(<span class="st">"^</span><span class="sc">\\</span><span class="st">s*Total</span><span class="sc">\\</span><span class="st">s*$"</span>, df_15_19<span class="sc">$</span>Notes, <span class="at">ignore.case =</span> <span class="cn">TRUE</span>), ]</span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>df_20_24 <span class="ot">&lt;-</span> df_20_24[<span class="sc">!</span><span class="fu">grepl</span>(<span class="st">"^</span><span class="sc">\\</span><span class="st">s*Total</span><span class="sc">\\</span><span class="st">s*$"</span>, df_20_24<span class="sc">$</span>Notes, <span class="at">ignore.case =</span> <span class="cn">TRUE</span>), ]</span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>df_25_29 <span class="ot">&lt;-</span> df_25_29[<span class="sc">!</span><span class="fu">grepl</span>(<span class="st">"^</span><span class="sc">\\</span><span class="st">s*Total</span><span class="sc">\\</span><span class="st">s*$"</span>, df_25_29<span class="sc">$</span>Notes, <span class="at">ignore.case =</span> <span class="cn">TRUE</span>), ]</span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>df_30_34 <span class="ot">&lt;-</span> df_30_34[<span class="sc">!</span><span class="fu">grepl</span>(<span class="st">"^</span><span class="sc">\\</span><span class="st">s*Total</span><span class="sc">\\</span><span class="st">s*$"</span>, df_30_34<span class="sc">$</span>Notes, <span class="at">ignore.case =</span> <span class="cn">TRUE</span>), ]</span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>df_35_39 <span class="ot">&lt;-</span> df_35_39[<span class="sc">!</span><span class="fu">grepl</span>(<span class="st">"^</span><span class="sc">\\</span><span class="st">s*Total</span><span class="sc">\\</span><span class="st">s*$"</span>, df_35_39<span class="sc">$</span>Notes, <span class="at">ignore.case =</span> <span class="cn">TRUE</span>), ]</span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>df_All <span class="ot">&lt;-</span> df_All[<span class="sc">!</span><span class="fu">duplicated</span>(df_All[<span class="fu">c</span>(<span class="st">'State'</span>, <span class="st">'State Code'</span>, <span class="st">'Year'</span>)]), ]</span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a><span class="co">#df_Less1 &lt;- df_Less1[!duplicated(df_Less1[c('State', 'State Code', 'Year')]), ]</span></span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>df_1_4 <span class="ot">&lt;-</span> df_1_4[<span class="sc">!</span><span class="fu">duplicated</span>(df_1_4[<span class="fu">c</span>(<span class="st">'State'</span>, <span class="st">'State Code'</span>, <span class="st">'Year'</span>)]), ]</span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>df_5_9 <span class="ot">&lt;-</span> df_5_9[<span class="sc">!</span><span class="fu">duplicated</span>(df_5_9[<span class="fu">c</span>(<span class="st">'State'</span>, <span class="st">'State Code'</span>, <span class="st">'Year'</span>)]), ]</span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>df_10_14 <span class="ot">&lt;-</span> df_10_14[<span class="sc">!</span><span class="fu">duplicated</span>(df_10_14[<span class="fu">c</span>(<span class="st">'State'</span>, <span class="st">'State Code'</span>, <span class="st">'Year'</span>)]), ]</span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>df_15_19 <span class="ot">&lt;-</span> df_15_19[<span class="sc">!</span><span class="fu">duplicated</span>(df_15_19[<span class="fu">c</span>(<span class="st">'State'</span>, <span class="st">'State Code'</span>, <span class="st">'Year'</span>)]), ]</span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>df_20_24 <span class="ot">&lt;-</span> df_20_24[<span class="sc">!</span><span class="fu">duplicated</span>(df_20_24[<span class="fu">c</span>(<span class="st">'State'</span>, <span class="st">'State Code'</span>, <span class="st">'Year'</span>)]), ]</span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>df_25_29 <span class="ot">&lt;-</span> df_25_29[<span class="sc">!</span><span class="fu">duplicated</span>(df_25_29[<span class="fu">c</span>(<span class="st">'State'</span>, <span class="st">'State Code'</span>, <span class="st">'Year'</span>)]), ]</span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>df_30_34 <span class="ot">&lt;-</span> df_30_34[<span class="sc">!</span><span class="fu">duplicated</span>(df_30_34[<span class="fu">c</span>(<span class="st">'State'</span>, <span class="st">'State Code'</span>, <span class="st">'Year'</span>)]), ]</span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>df_35_39 <span class="ot">&lt;-</span> df_35_39[<span class="sc">!</span><span class="fu">duplicated</span>(df_35_39[<span class="fu">c</span>(<span class="st">'State'</span>, <span class="st">'State Code'</span>, <span class="st">'Year'</span>)]), ]</span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a><span class="co">#df_All &lt;- merge(df_All, df_Less1, by = c('State', 'State Code', 'Year'), suffixes = c('', '_Less1'))</span></span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>df_All <span class="ot">&lt;-</span> <span class="fu">merge</span>(df_All, df_1_4, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">'State'</span>, <span class="st">'State Code'</span>, <span class="st">'Year'</span>), <span class="at">suffixes =</span> <span class="fu">c</span>(<span class="st">''</span>, <span class="st">'_1_4'</span>))</span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a>df_All <span class="ot">&lt;-</span> <span class="fu">merge</span>(df_All, df_5_9, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">'State'</span>, <span class="st">'State Code'</span>, <span class="st">'Year'</span>), <span class="at">suffixes =</span> <span class="fu">c</span>(<span class="st">''</span>, <span class="st">'_5_9'</span>))</span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a>df_All <span class="ot">&lt;-</span> <span class="fu">merge</span>(df_All, df_10_14, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">'State'</span>, <span class="st">'State Code'</span>, <span class="st">'Year'</span>), <span class="at">suffixes =</span> <span class="fu">c</span>(<span class="st">''</span>, <span class="st">'_10_14'</span>))</span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a>df_All <span class="ot">&lt;-</span> <span class="fu">merge</span>(df_All, df_15_19, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">'State'</span>, <span class="st">'State Code'</span>, <span class="st">'Year'</span>), <span class="at">suffixes =</span> <span class="fu">c</span>(<span class="st">''</span>, <span class="st">'_15_19'</span>))</span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a>df_All <span class="ot">&lt;-</span> <span class="fu">merge</span>(df_All, df_20_24, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">'State'</span>, <span class="st">'State Code'</span>, <span class="st">'Year'</span>), <span class="at">suffixes =</span> <span class="fu">c</span>(<span class="st">''</span>, <span class="st">'_20_24'</span>))</span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a>df_All <span class="ot">&lt;-</span> <span class="fu">merge</span>(df_All, df_25_29, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">'State'</span>, <span class="st">'State Code'</span>, <span class="st">'Year'</span>), <span class="at">suffixes =</span> <span class="fu">c</span>(<span class="st">''</span>, <span class="st">'_25_29'</span>))</span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a>df_All <span class="ot">&lt;-</span> <span class="fu">merge</span>(df_All, df_30_34, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">'State'</span>, <span class="st">'State Code'</span>, <span class="st">'Year'</span>), <span class="at">suffixes =</span> <span class="fu">c</span>(<span class="st">''</span>, <span class="st">'_30_34'</span>))</span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a>df_All <span class="ot">&lt;-</span> <span class="fu">merge</span>(df_All, df_35_39, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">'State'</span>, <span class="st">'State Code'</span>, <span class="st">'Year'</span>), <span class="at">suffixes =</span> <span class="fu">c</span>(<span class="st">''</span>, <span class="st">'_35_39'</span>))</span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="data" class="level1">
+<h1>Data</h1>
+<p>The death data utilized in this study were collected from the CDC WONDER database. This database compiles death and population data across the United States. For this analysis, we extracted total mortality data spanning from 1999 to 2020. This period was selected to capture the effects of MMLs over a timeframe, which allows for an assessment of long-term trends and changes in overall death rates following the enactment of these laws. The data for unemployement and income were collected from FRED database. We controlled for these variables as previous studies found a relationship between them and drug use. The following table presents the descriptive statistics for our outcome measures by focusing on the death rate (crude mortality) rates across various age groups and states. The first row is the average of death for all age groups per 100000* people. The second row is the death average for 15-19 per 100000 people. The other rows correspond to progressively older age groups, 20-24, 25-29, 30-34, and 35-39 years. Additionally, categories for 20-40 years and over 40 years are also included.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>df_All<span class="sc">$</span>Crude_Rate15_19 <span class="ot">&lt;-</span> (df_All<span class="sc">$</span>Deaths_15_19 <span class="sc">/</span> df_All<span class="sc">$</span>Population_15_19) <span class="sc">*</span> <span class="dv">100000</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>df_All<span class="sc">$</span>Crude_Rate20_24 <span class="ot">&lt;-</span> (df_All<span class="sc">$</span>Deaths_20_24 <span class="sc">/</span> df_All<span class="sc">$</span>Population_20_24) <span class="sc">*</span> <span class="dv">100000</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>df_All<span class="sc">$</span>Crude_Rate25_29 <span class="ot">&lt;-</span> (df_All<span class="sc">$</span>Deaths_25_29 <span class="sc">/</span> df_All<span class="sc">$</span>Population_25_29) <span class="sc">*</span> <span class="dv">100000</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>df_All<span class="sc">$</span>Crude_Rate30_34 <span class="ot">&lt;-</span> (df_All<span class="sc">$</span>Deaths_30_34 <span class="sc">/</span> df_All<span class="sc">$</span>Population_30_34) <span class="sc">*</span> <span class="dv">100000</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>df_All<span class="sc">$</span>Crude_Rate35_39 <span class="ot">&lt;-</span> (df_All<span class="sc">$</span>Deaths_35_39 <span class="sc">/</span> df_All<span class="sc">$</span>Population_35_39) <span class="sc">*</span> <span class="dv">100000</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>df_All<span class="sc">$</span>Deaths_gt40 <span class="ot">&lt;-</span> df_All<span class="sc">$</span>Deaths <span class="sc">-</span> ( df_All<span class="sc">$</span>Deaths_1_4 <span class="sc">+</span> df_All<span class="sc">$</span>Deaths_5_9 <span class="sc">+</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>                                          df_All<span class="sc">$</span>Deaths_10_14 <span class="sc">+</span> df_All<span class="sc">$</span>Deaths_15_19 <span class="sc">+</span> df_All<span class="sc">$</span>Deaths_20_24 <span class="sc">+</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>                                          df_All<span class="sc">$</span>Deaths_25_29 <span class="sc">+</span> df_All<span class="sc">$</span>Deaths_30_34 <span class="sc">+</span> df_All<span class="sc">$</span>Deaths_35_39)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>df_All<span class="sc">$</span>Population_gt40 <span class="ot">&lt;-</span> df_All<span class="sc">$</span>Population <span class="sc">-</span> ( df_All<span class="sc">$</span>Population_1_4 <span class="sc">+</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>                                                  df_All<span class="sc">$</span>Population_5_9 <span class="sc">+</span> df_All<span class="sc">$</span>Population_10_14 <span class="sc">+</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>                                                  df_All<span class="sc">$</span>Population_15_19 <span class="sc">+</span> df_All<span class="sc">$</span>Population_20_24 <span class="sc">+</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>                                                  df_All<span class="sc">$</span>Population_25_29 <span class="sc">+</span> df_All<span class="sc">$</span>Population_30_34 <span class="sc">+</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>                                                  df_All<span class="sc">$</span>Population_35_39)</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>df_All<span class="sc">$</span>Crude_Rate_gt40 <span class="ot">&lt;-</span> (df_All<span class="sc">$</span>Deaths_gt40 <span class="sc">/</span> df_All<span class="sc">$</span>Population_gt40) <span class="sc">*</span> <span class="dv">100000</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>df_All<span class="sc">$</span>Deaths_20_40 <span class="ot">&lt;-</span> df_All<span class="sc">$</span>Deaths_20_24 <span class="sc">+</span> df_All<span class="sc">$</span>Deaths_25_29 <span class="sc">+</span> df_All<span class="sc">$</span>Deaths_30_34 <span class="sc">+</span> df_All<span class="sc">$</span>Deaths_35_39</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>df_All<span class="sc">$</span>Population_20_40 <span class="ot">&lt;-</span> df_All<span class="sc">$</span>Population_20_24 <span class="sc">+</span> df_All<span class="sc">$</span>Population_25_29 <span class="sc">+</span> df_All<span class="sc">$</span>Population_30_34 <span class="sc">+</span> df_All<span class="sc">$</span>Population_35_39</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>df_All<span class="sc">$</span>Crude_Rate_20_40 <span class="ot">&lt;-</span> (df_All<span class="sc">$</span>Deaths_20_40 <span class="sc">/</span> df_All<span class="sc">$</span>Population_20_40) <span class="sc">*</span> <span class="dv">100000</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>
+Attaching package: 'dplyr'</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:stats':
+
+    filter, lag</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>The following objects are masked from 'package:base':
+
+    intersect, setdiff, setequal, union</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>DF_Descriptive_1 <span class="ot">&lt;-</span> df_All[, <span class="fu">c</span>(<span class="st">'Year'</span>,<span class="st">'State Code'</span>,<span class="st">'Crude Rate'</span>, <span class="st">'Crude Rate_15_19'</span>, <span class="st">'Crude Rate_20_24'</span>, <span class="st">'Crude Rate_25_29'</span>, <span class="st">'Crude Rate_30_34'</span>,</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>                               <span class="st">'Crude Rate_35_39'</span>, <span class="st">'Crude_Rate_20_40'</span>, <span class="st">'Crude_Rate_gt40'</span>)]</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(DF_Descriptive_1) <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>numeric_cols <span class="ot">&lt;-</span> DF_Descriptive_1[<span class="fu">sapply</span>(DF_Descriptive_1, is.numeric)]</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>DF_Descriptive_mean_1 <span class="ot">&lt;-</span> <span class="fu">aggregate</span>(. <span class="sc">~</span> <span class="st">`</span><span class="at">State Code</span><span class="st">`</span>, <span class="at">data =</span> numeric_cols, <span class="at">FUN =</span> mean, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>DF_Descriptive_mean_1 <span class="ot">&lt;-</span> DF_Descriptive_mean_1[, <span class="sc">-</span><span class="fu">c</span>(<span class="dv">1</span>, <span class="fu">ncol</span>(DF_Descriptive_mean_1))]</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>DF_Descriptive_mean_2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">colMeans</span>(DF_Descriptive_mean_1))</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>DF_Descriptive_std_2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">apply</span>(DF_Descriptive_mean_1, <span class="dv">2</span>, sd))</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(DF_Descriptive_mean_2) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">'Mean'</span>)</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(DF_Descriptive_std_2) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">'STD'</span>)</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>DF_Descriptive <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Mean =</span> DF_Descriptive_mean_2<span class="sc">$</span>Mean, <span class="at">STD =</span> DF_Descriptive_std_2<span class="sc">$</span>STD)</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(DF_Descriptive)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       Mean        STD
+1 2008.9567   2.091644
+2  867.5735 131.406245
+3   96.2881  20.171489
+4  108.4241  26.438054
+5  129.2288  33.945383
+6  167.7465  40.781748
+7  125.2709  29.170438</code></pre>
+</div>
+</div>
+</section>
+<section id="empirical-strategy" class="level1">
+<h1>Empirical strategy</h1>
+<p>We utilized difference-in-differences (DiD) approach which compares the changes in outcomes over time between a treatment group (states with MMLs) and a control group (states without MMLs). This method allows us to control for both time and year fixed effects and unobserved heterogeneity between treated and control groups which can isolates the effect of MMLs on death rates across the United States.</p>
+<p>Our main assumption is that in the absence of MMLs, both treated and control groups would have followed the same path. Additionally, we also assumed that one state’s adoption of MMLs is not directly affected by death rates in another state.</p>
+</section>
+<section id="results" class="level1">
+<h1>Results</h1>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>df_All<span class="sc">$</span>Deaths_gt40 <span class="ot">&lt;-</span> df_All<span class="sc">$</span>Deaths <span class="sc">-</span> ( df_All<span class="sc">$</span>Deaths_1_4 <span class="sc">+</span> df_All<span class="sc">$</span>Deaths_5_9 <span class="sc">+</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>                                          df_All<span class="sc">$</span>Deaths_10_14 <span class="sc">+</span> df_All<span class="sc">$</span>Deaths_15_19 <span class="sc">+</span> df_All<span class="sc">$</span>Deaths_20_24 <span class="sc">+</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>                                          df_All<span class="sc">$</span>Deaths_25_29 <span class="sc">+</span> df_All<span class="sc">$</span>Deaths_30_34 <span class="sc">+</span> df_All<span class="sc">$</span>Deaths_35_39)</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>df_All<span class="sc">$</span>Population_gt40 <span class="ot">&lt;-</span> df_All<span class="sc">$</span>Population <span class="sc">-</span> ( df_All<span class="sc">$</span>Population_1_4 <span class="sc">+</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>                                                  df_All<span class="sc">$</span>Population_5_9 <span class="sc">+</span> df_All<span class="sc">$</span>Population_10_14 <span class="sc">+</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>                                                  df_All<span class="sc">$</span>Population_15_19 <span class="sc">+</span> df_All<span class="sc">$</span>Population_20_24 <span class="sc">+</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>                                                  df_All<span class="sc">$</span>Population_25_29 <span class="sc">+</span> df_All<span class="sc">$</span>Population_30_34 <span class="sc">+</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>                                                  df_All<span class="sc">$</span>Population_35_39)</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>df_All<span class="sc">$</span>Crude_Rate_gt40 <span class="ot">&lt;-</span> (df_All<span class="sc">$</span>Deaths_gt40 <span class="sc">/</span> df_All<span class="sc">$</span>Population_gt40) <span class="sc">*</span> <span class="dv">100000</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>df_All<span class="sc">$</span>Deaths_20_40 <span class="ot">&lt;-</span> df_All<span class="sc">$</span>Deaths_20_24 <span class="sc">+</span> df_All<span class="sc">$</span>Deaths_25_29 <span class="sc">+</span> df_All<span class="sc">$</span>Deaths_30_34 <span class="sc">+</span> df_All<span class="sc">$</span>Deaths_35_39</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>df_All<span class="sc">$</span>Population_20_40 <span class="ot">&lt;-</span> df_All<span class="sc">$</span>Population_20_24 <span class="sc">+</span> df_All<span class="sc">$</span>Population_25_29 <span class="sc">+</span> df_All<span class="sc">$</span>Population_30_34 <span class="sc">+</span> df_All<span class="sc">$</span>Population_35_39</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>df_All<span class="sc">$</span>Crude_Rate_20_40 <span class="ot">&lt;-</span> (df_All<span class="sc">$</span>Deaths_20_40 <span class="sc">/</span> df_All<span class="sc">$</span>Population_20_40) <span class="sc">*</span> <span class="dv">100000</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>DF_Descriptive_1 <span class="ot">&lt;-</span> df_All[, <span class="fu">c</span>(<span class="st">'Year'</span>,<span class="st">'State Code'</span>,<span class="st">'Crude Rate'</span>, <span class="st">'Crude Rate_15_19'</span>, <span class="st">'Crude Rate_20_24'</span>, <span class="st">'Crude Rate_25_29'</span>, <span class="st">'Crude Rate_30_34'</span>,</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>                               <span class="st">'Crude Rate_35_39'</span>, <span class="st">'Crude_Rate_20_40'</span>, <span class="st">'Crude_Rate_gt40'</span>)]</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a><span class="fu">rownames</span>(DF_Descriptive_1) <span class="ot">&lt;-</span> <span class="cn">NULL</span></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>numeric_cols <span class="ot">&lt;-</span> DF_Descriptive_1[<span class="fu">sapply</span>(DF_Descriptive_1, is.numeric)]</span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>DF_Descriptive_mean_1 <span class="ot">&lt;-</span> <span class="fu">aggregate</span>(. <span class="sc">~</span> <span class="st">`</span><span class="at">State Code</span><span class="st">`</span>, <span class="at">data =</span> numeric_cols, <span class="at">FUN =</span> mean, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>DF_Descriptive_mean_1 <span class="ot">&lt;-</span> DF_Descriptive_mean_1[, <span class="sc">-</span><span class="fu">c</span>(<span class="dv">1</span>, <span class="fu">ncol</span>(DF_Descriptive_mean_1))]</span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>DF_Descriptive_mean_2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">colMeans</span>(DF_Descriptive_mean_1))</span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>DF_Descriptive_std_2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="fu">apply</span>(DF_Descriptive_mean_1, <span class="dv">2</span>, sd))</span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(DF_Descriptive_mean_2) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">'Mean'</span>)</span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(DF_Descriptive_std_2) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">'STD'</span>)</span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>DF_Descriptive <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">Mean =</span> DF_Descriptive_mean_2<span class="sc">$</span>Mean, <span class="at">STD =</span> DF_Descriptive_std_2<span class="sc">$</span>STD)</span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(DF_Descriptive)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       Mean        STD
+1 2008.9567   2.091644
+2  867.5735 131.406245
+3   96.2881  20.171489
+4  108.4241  26.438054
+5  129.2288  33.945383
+6  167.7465  40.781748
+7  125.2709  29.170438</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>ALL_AGE <span class="ot">&lt;-</span> df_All[, <span class="fu">c</span>(<span class="st">'State'</span>,<span class="st">'State Code'</span>,<span class="st">'Year'</span>,<span class="st">'Year Code'</span>, <span class="st">'Deaths'</span>, <span class="st">'Population'</span>, <span class="st">'Crude Rate'</span>, <span class="st">'year_effect'</span>)]</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>AGE_15_19 <span class="ot">&lt;-</span> df_All[, <span class="fu">c</span>(<span class="st">'State'</span>,<span class="st">'State Code'</span>,<span class="st">'Year'</span>,<span class="st">'Year Code_15_19'</span>, <span class="st">'Deaths_15_19'</span>, <span class="st">'Population_15_19'</span>, <span class="st">'Crude Rate_15_19'</span>, <span class="st">'year_effect_15_19'</span>)]</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>AGE_15_19<span class="sc">$</span><span class="st">`</span><span class="at">Crude Rate_15_19</span><span class="st">`</span> <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">as.character</span>(AGE_15_19<span class="sc">$</span><span class="st">`</span><span class="at">Crude Rate_15_19</span><span class="st">`</span>))</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>AGE_20_24 <span class="ot">&lt;-</span> df_All[, <span class="fu">c</span>(<span class="st">'State'</span>,<span class="st">'State Code'</span>,<span class="st">'Year'</span>,<span class="st">'Year Code_20_24'</span>, <span class="st">'Deaths_20_24'</span>, <span class="st">'Population_20_24'</span>, <span class="st">'Crude Rate_20_24'</span>, <span class="st">'year_effect_20_24'</span>)]</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>AGE_25_29 <span class="ot">&lt;-</span> df_All[, <span class="fu">c</span>(<span class="st">'State'</span>,<span class="st">'State Code'</span>,<span class="st">'Year'</span>,<span class="st">'Year Code_25_29'</span>, <span class="st">'Deaths_25_29'</span>, <span class="st">'Population_25_29'</span>, <span class="st">'Crude Rate_25_29'</span>, <span class="st">'year_effect_25_29'</span>)]</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>AGE_30_34 <span class="ot">&lt;-</span> df_All[, <span class="fu">c</span>(<span class="st">'State'</span>,<span class="st">'State Code'</span>,<span class="st">'Year'</span>,<span class="st">'Year Code_30_34'</span>, <span class="st">'Deaths_30_34'</span>, <span class="st">'Population_30_34'</span>, <span class="st">'Crude Rate_30_34'</span>, <span class="st">'year_effect_30_34'</span>)]</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>AGE_35_39 <span class="ot">&lt;-</span> df_All[, <span class="fu">c</span>(<span class="st">'State'</span>,<span class="st">'State Code'</span>,<span class="st">'Year'</span>,<span class="st">'Year Code_35_39'</span>, <span class="st">'Deaths_35_39'</span>, <span class="st">'Population_35_39'</span>, <span class="st">'Crude Rate_35_39'</span>, <span class="st">'year_effect_35_39'</span>)]</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>AGE_20_40 <span class="ot">&lt;-</span> df_All[, <span class="fu">c</span>(<span class="st">'State'</span>,<span class="st">'State Code'</span>,<span class="st">'Year'</span>,<span class="st">'Crude_Rate_20_40'</span>, <span class="st">'Deaths_20_40'</span>, <span class="st">'Population_20_40'</span>, <span class="st">'Crude_Rate_20_40'</span>, <span class="st">'year_effect_35_39'</span>)]</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>AGE_more40 <span class="ot">&lt;-</span> df_All[,<span class="fu">c</span>(<span class="st">'State'</span>,<span class="st">'State Code'</span>,<span class="st">'Year'</span>,<span class="st">'Crude_Rate_gt40'</span>, <span class="st">'Deaths_gt40'</span>, <span class="st">'Population_gt40'</span>, <span class="st">'Crude_Rate_gt40'</span>, <span class="st">'year_effect'</span>)]</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>assign_type <span class="ot">&lt;-</span> <span class="cf">function</span>(year_effect) {</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ifelse</span>(year_effect <span class="sc">&gt;=</span> <span class="dv">2004</span> <span class="sc">&amp;</span> year_effect <span class="sc">&lt;=</span> <span class="dv">2015</span>, <span class="dv">2</span>,</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>         <span class="fu">ifelse</span>(year_effect <span class="sc">&lt;</span> <span class="dv">2004</span>, <span class="dv">1</span>, <span class="dv">3</span>))}</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>ALL_AGE<span class="sc">$</span>type <span class="ot">&lt;-</span> <span class="fu">assign_type</span>(ALL_AGE<span class="sc">$</span>year_effect)</span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>AGE_15_19<span class="sc">$</span>type <span class="ot">&lt;-</span> <span class="fu">assign_type</span>(AGE_15_19<span class="sc">$</span>year_effect_15_19)</span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>AGE_20_24<span class="sc">$</span>type <span class="ot">&lt;-</span> <span class="fu">assign_type</span>(AGE_20_24<span class="sc">$</span>year_effect_20_24)</span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>AGE_25_29<span class="sc">$</span>type <span class="ot">&lt;-</span> <span class="fu">assign_type</span>(AGE_25_29<span class="sc">$</span>year_effect_25_29)</span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>AGE_30_34<span class="sc">$</span>type <span class="ot">&lt;-</span> <span class="fu">assign_type</span>(AGE_30_34<span class="sc">$</span>year_effect_30_34)</span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>AGE_35_39<span class="sc">$</span>type <span class="ot">&lt;-</span> <span class="fu">assign_type</span>(AGE_35_39<span class="sc">$</span>year_effect_35_39)</span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>AGE_20_40<span class="sc">$</span>type <span class="ot">&lt;-</span> <span class="fu">assign_type</span>(AGE_20_40<span class="sc">$</span>year_effect_35_39)</span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>AGE_more40<span class="sc">$</span>type <span class="ot">&lt;-</span> <span class="fu">assign_type</span>(AGE_more40<span class="sc">$</span>year_effect)</span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(AGE_15_19)[<span class="fu">names</span>(AGE_15_19) <span class="sc">==</span> <span class="st">"year_effect_15_19"</span>] <span class="ot">&lt;-</span> <span class="st">"year_effect"</span></span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(AGE_20_24)[<span class="fu">names</span>(AGE_20_24) <span class="sc">==</span> <span class="st">"year_effect_20_24"</span>] <span class="ot">&lt;-</span> <span class="st">"year_effect"</span></span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(AGE_25_29)[<span class="fu">names</span>(AGE_25_29) <span class="sc">==</span> <span class="st">"year_effect_25_29"</span>] <span class="ot">&lt;-</span> <span class="st">"year_effect"</span></span>
+<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(AGE_30_34)[<span class="fu">names</span>(AGE_30_34) <span class="sc">==</span> <span class="st">"year_effect_30_34"</span>] <span class="ot">&lt;-</span> <span class="st">"year_effect"</span></span>
+<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(AGE_35_39)[<span class="fu">names</span>(AGE_35_39) <span class="sc">==</span> <span class="st">"year_effect_35_39"</span>] <span class="ot">&lt;-</span> <span class="st">"year_effect"</span></span>
+<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(AGE_20_40)[<span class="fu">names</span>(AGE_20_40) <span class="sc">==</span> <span class="st">"year_effect_35_39"</span>] <span class="ot">&lt;-</span> <span class="st">"year_effect"</span></span>
+<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-35"><a href="#cb10-35" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb10-36"><a href="#cb10-36" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb10-37"><a href="#cb10-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-38"><a href="#cb10-38" aria-hidden="true" tabindex="-1"></a>filter_years <span class="ot">&lt;-</span> <span class="cf">function</span>(group) {</span>
+<span id="cb10-39"><a href="#cb10-39" aria-hidden="true" tabindex="-1"></a>  effect_year <span class="ot">&lt;-</span> group<span class="sc">$</span>year_effect[<span class="dv">1</span>]</span>
+<span id="cb10-40"><a href="#cb10-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(group <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Year <span class="sc">&gt;=</span> effect_year <span class="sc">-</span> <span class="dv">5</span> <span class="sc">&amp;</span> Year <span class="sc">&lt;=</span> effect_year <span class="sc">+</span> <span class="dv">5</span>))}</span>
+<span id="cb10-41"><a href="#cb10-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-42"><a href="#cb10-42" aria-hidden="true" tabindex="-1"></a>select_random_years <span class="ot">&lt;-</span> <span class="cf">function</span>(group) {</span>
+<span id="cb10-43"><a href="#cb10-43" aria-hidden="true" tabindex="-1"></a>  random_years <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">2004</span><span class="sc">:</span><span class="dv">2015</span>, <span class="dv">11</span>)</span>
+<span id="cb10-44"><a href="#cb10-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(group <span class="sc">%&gt;%</span> <span class="fu">filter</span>(Year <span class="sc">%in%</span> random_years))}</span>
+<span id="cb10-45"><a href="#cb10-45" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-46"><a href="#cb10-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-47"><a href="#cb10-47" aria-hidden="true" tabindex="-1"></a>ALL_AGE_treated <span class="ot">&lt;-</span> ALL_AGE[ALL_AGE<span class="sc">$</span>type <span class="sc">==</span> <span class="dv">2</span>, ]</span>
+<span id="cb10-48"><a href="#cb10-48" aria-hidden="true" tabindex="-1"></a>filtered_ALL_AGE_treated <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind, <span class="fu">by</span>(ALL_AGE_treated, ALL_AGE_treated<span class="sc">$</span>State, filter_years))</span>
+<span id="cb10-49"><a href="#cb10-49" aria-hidden="true" tabindex="-1"></a>filtered_ALL_AGE_treated<span class="sc">$</span>rank <span class="ot">&lt;-</span> filtered_ALL_AGE_treated<span class="sc">$</span>Year <span class="sc">-</span> filtered_ALL_AGE_treated<span class="sc">$</span>year_effect</span>
+<span id="cb10-50"><a href="#cb10-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-51"><a href="#cb10-51" aria-hidden="true" tabindex="-1"></a>ALL_AGE_treated_mean <span class="ot">&lt;-</span> filtered_ALL_AGE_treated <span class="sc">%&gt;%</span></span>
+<span id="cb10-52"><a href="#cb10-52" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(rank) <span class="sc">%&gt;%</span></span>
+<span id="cb10-53"><a href="#cb10-53" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.numeric), <span class="sc">~</span> <span class="fu">mean</span>(., <span class="at">na.rm =</span> <span class="cn">TRUE</span>)))</span>
+<span id="cb10-54"><a href="#cb10-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-55"><a href="#cb10-55" aria-hidden="true" tabindex="-1"></a>AGE_15_19_treated <span class="ot">&lt;-</span> AGE_15_19[AGE_15_19<span class="sc">$</span>type <span class="sc">==</span> <span class="dv">2</span>, ]</span>
+<span id="cb10-56"><a href="#cb10-56" aria-hidden="true" tabindex="-1"></a>filtered_AGE_15_19_treated <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind, <span class="fu">by</span>(AGE_15_19_treated, AGE_15_19_treated<span class="sc">$</span>State, filter_years))</span>
+<span id="cb10-57"><a href="#cb10-57" aria-hidden="true" tabindex="-1"></a>filtered_AGE_15_19_treated<span class="sc">$</span>rank <span class="ot">&lt;-</span> filtered_AGE_15_19_treated<span class="sc">$</span>Year <span class="sc">-</span> filtered_AGE_15_19_treated<span class="sc">$</span>year_effect</span>
+<span id="cb10-58"><a href="#cb10-58" aria-hidden="true" tabindex="-1"></a>filtered_AGE_15_19_treated<span class="sc">$</span><span class="st">`</span><span class="at">Crude Rate_15_19</span><span class="st">`</span> <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">as.character</span>(filtered_AGE_15_19_treated<span class="sc">$</span><span class="st">`</span><span class="at">Crude Rate_15_19</span><span class="st">`</span>))</span>
+<span id="cb10-59"><a href="#cb10-59" aria-hidden="true" tabindex="-1"></a>AGE_15_19_treated_mean <span class="ot">&lt;-</span> filtered_AGE_15_19_treated <span class="sc">%&gt;%</span></span>
+<span id="cb10-60"><a href="#cb10-60" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(rank) <span class="sc">%&gt;%</span></span>
+<span id="cb10-61"><a href="#cb10-61" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.numeric), <span class="sc">~</span><span class="fu">mean</span>(., <span class="at">na.rm =</span> <span class="cn">TRUE</span>)))</span>
+<span id="cb10-62"><a href="#cb10-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-63"><a href="#cb10-63" aria-hidden="true" tabindex="-1"></a>AGE_20_24_treated <span class="ot">&lt;-</span> AGE_20_24[AGE_20_24<span class="sc">$</span>type <span class="sc">==</span> <span class="dv">2</span>, ]</span>
+<span id="cb10-64"><a href="#cb10-64" aria-hidden="true" tabindex="-1"></a>filtered_AGE_20_24_treated <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind, <span class="fu">by</span>(AGE_20_24_treated, AGE_20_24_treated<span class="sc">$</span>State, filter_years))</span>
+<span id="cb10-65"><a href="#cb10-65" aria-hidden="true" tabindex="-1"></a>filtered_AGE_20_24_treated<span class="sc">$</span>rank <span class="ot">&lt;-</span> filtered_AGE_20_24_treated<span class="sc">$</span>Year <span class="sc">-</span> filtered_AGE_20_24_treated<span class="sc">$</span>year_effect</span>
+<span id="cb10-66"><a href="#cb10-66" aria-hidden="true" tabindex="-1"></a>AGE_20_24_treated_mean <span class="ot">&lt;-</span> filtered_AGE_20_24_treated <span class="sc">%&gt;%</span></span>
+<span id="cb10-67"><a href="#cb10-67" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(rank) <span class="sc">%&gt;%</span></span>
+<span id="cb10-68"><a href="#cb10-68" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.numeric), mean, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: There was 1 warning in `summarise()`.
+ℹ In argument: `across(where(is.numeric), mean, na.rm = TRUE)`.
+ℹ In group 1: `rank = -5`.
+Caused by warning:
+! The `...` argument of `across()` is deprecated as of dplyr 1.1.0.
+Supply arguments directly to `.fns` through an anonymous function instead.
+
+  # Previously
+  across(a:b, mean, na.rm = TRUE)
+
+  # Now
+  across(a:b, \(x) mean(x, na.rm = TRUE))</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>AGE_25_29_treated <span class="ot">&lt;-</span> AGE_25_29[AGE_25_29<span class="sc">$</span>type <span class="sc">==</span> <span class="dv">2</span>, ]</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>filtered_AGE_25_29_treated <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind, <span class="fu">by</span>(AGE_25_29_treated, AGE_25_29_treated<span class="sc">$</span>State, filter_years))</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>filtered_AGE_25_29_treated<span class="sc">$</span>rank <span class="ot">&lt;-</span> filtered_AGE_25_29_treated<span class="sc">$</span>Year <span class="sc">-</span> filtered_AGE_25_29_treated<span class="sc">$</span>year_effect</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>AGE_25_29_treated_mean <span class="ot">&lt;-</span> filtered_AGE_25_29_treated <span class="sc">%&gt;%</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(rank) <span class="sc">%&gt;%</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.numeric), mean, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>AGE_30_34_treated <span class="ot">&lt;-</span> AGE_30_34[AGE_30_34<span class="sc">$</span>type <span class="sc">==</span> <span class="dv">2</span>, ]</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>filtered_AGE_30_34_treated <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind, <span class="fu">by</span>(AGE_30_34_treated, AGE_30_34_treated<span class="sc">$</span>State, filter_years))</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>filtered_AGE_30_34_treated<span class="sc">$</span>rank <span class="ot">&lt;-</span> filtered_AGE_30_34_treated<span class="sc">$</span>Year <span class="sc">-</span> filtered_AGE_30_34_treated<span class="sc">$</span>year_effect</span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>AGE_30_34_treated_mean <span class="ot">&lt;-</span> filtered_AGE_30_34_treated <span class="sc">%&gt;%</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(rank) <span class="sc">%&gt;%</span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.numeric), mean, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a>AGE_35_39_treated <span class="ot">&lt;-</span> AGE_35_39[AGE_35_39<span class="sc">$</span>type <span class="sc">==</span> <span class="dv">2</span>, ]</span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a>filtered_AGE_35_39_treated <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind, <span class="fu">by</span>(AGE_35_39_treated, AGE_35_39_treated<span class="sc">$</span>State, filter_years))</span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>filtered_AGE_35_39_treated<span class="sc">$</span>rank <span class="ot">&lt;-</span> filtered_AGE_35_39_treated<span class="sc">$</span>Year <span class="sc">-</span> filtered_AGE_35_39_treated<span class="sc">$</span>year_effect</span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>AGE_35_39_treated_mean <span class="ot">&lt;-</span> filtered_AGE_35_39_treated <span class="sc">%&gt;%</span></span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(rank) <span class="sc">%&gt;%</span></span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.numeric), mean, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a>AGE_20_40_treated <span class="ot">&lt;-</span> AGE_20_40[AGE_20_40<span class="sc">$</span>type <span class="sc">==</span> <span class="dv">2</span>, ]</span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a>filtered_AGE_20_40_treated <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind, <span class="fu">by</span>(AGE_20_40_treated, AGE_20_40_treated<span class="sc">$</span>State, filter_years))</span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a>filtered_AGE_20_40_treated<span class="sc">$</span>rank <span class="ot">&lt;-</span> filtered_AGE_20_40_treated<span class="sc">$</span>Year <span class="sc">-</span> filtered_AGE_20_40_treated<span class="sc">$</span>year_effect</span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a>AGE_20_40_treated_mean <span class="ot">&lt;-</span> filtered_AGE_20_40_treated <span class="sc">%&gt;%</span></span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(rank) <span class="sc">%&gt;%</span></span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.numeric), mean, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a>AGE_more40_treated <span class="ot">&lt;-</span> AGE_more40[AGE_more40<span class="sc">$</span>type <span class="sc">==</span> <span class="dv">2</span>, ]</span>
+<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a>filtered_AGE_more40_treated <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind, <span class="fu">by</span>(AGE_more40_treated, AGE_more40_treated<span class="sc">$</span>State, filter_years))</span>
+<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a>filtered_AGE_more40_treated<span class="sc">$</span>rank <span class="ot">&lt;-</span> filtered_AGE_more40_treated<span class="sc">$</span>Year <span class="sc">-</span> filtered_AGE_more40_treated<span class="sc">$</span>year_effect</span>
+<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a>AGE_more40_treated_mean <span class="ot">&lt;-</span> filtered_AGE_more40_treated <span class="sc">%&gt;%</span></span>
+<span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(rank) <span class="sc">%&gt;%</span></span>
+<span id="cb12-34"><a href="#cb12-34" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.numeric), mean, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb12-35"><a href="#cb12-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-36"><a href="#cb12-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-37"><a href="#cb12-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-38"><a href="#cb12-38" aria-hidden="true" tabindex="-1"></a>ALL_AGE_control <span class="ot">&lt;-</span> ALL_AGE[ALL_AGE<span class="sc">$</span>type <span class="sc">==</span> <span class="dv">3</span>, ]</span>
+<span id="cb12-39"><a href="#cb12-39" aria-hidden="true" tabindex="-1"></a>filtered_ALL_AGE_control <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind, <span class="fu">by</span>(ALL_AGE_control, ALL_AGE_control<span class="sc">$</span>State, select_random_years))</span>
+<span id="cb12-40"><a href="#cb12-40" aria-hidden="true" tabindex="-1"></a>filtered_ALL_AGE_control <span class="ot">&lt;-</span> filtered_ALL_AGE_control <span class="sc">%&gt;%</span></span>
+<span id="cb12-41"><a href="#cb12-41" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(State, Year) <span class="sc">%&gt;%</span></span>
+<span id="cb12-42"><a href="#cb12-42" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(State) <span class="sc">%&gt;%</span></span>
+<span id="cb12-43"><a href="#cb12-43" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">rank =</span> <span class="fu">row_number</span>() <span class="sc">-</span> <span class="dv">6</span>) <span class="sc">%&gt;%</span>  </span>
+<span id="cb12-44"><a href="#cb12-44" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb12-45"><a href="#cb12-45" aria-hidden="true" tabindex="-1"></a>ALL_AGE_control_mean <span class="ot">&lt;-</span> filtered_ALL_AGE_control <span class="sc">%&gt;%</span></span>
+<span id="cb12-46"><a href="#cb12-46" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(rank) <span class="sc">%&gt;%</span></span>
+<span id="cb12-47"><a href="#cb12-47" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.numeric), mean, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb12-48"><a href="#cb12-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-49"><a href="#cb12-49" aria-hidden="true" tabindex="-1"></a>AGE_15_19_control <span class="ot">&lt;-</span> AGE_15_19[AGE_15_19<span class="sc">$</span>type <span class="sc">==</span> <span class="dv">3</span>, ]</span>
+<span id="cb12-50"><a href="#cb12-50" aria-hidden="true" tabindex="-1"></a>filtered_AGE_15_19_control <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind, <span class="fu">by</span>(AGE_15_19_control, AGE_15_19_control<span class="sc">$</span>State, select_random_years))</span>
+<span id="cb12-51"><a href="#cb12-51" aria-hidden="true" tabindex="-1"></a>filtered_AGE_15_19_control <span class="ot">&lt;-</span> filtered_AGE_15_19_control <span class="sc">%&gt;%</span></span>
+<span id="cb12-52"><a href="#cb12-52" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(State, Year) <span class="sc">%&gt;%</span></span>
+<span id="cb12-53"><a href="#cb12-53" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(State) <span class="sc">%&gt;%</span></span>
+<span id="cb12-54"><a href="#cb12-54" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">rank =</span> <span class="fu">row_number</span>() <span class="sc">-</span> <span class="dv">6</span>) <span class="sc">%&gt;%</span>  </span>
+<span id="cb12-55"><a href="#cb12-55" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb12-56"><a href="#cb12-56" aria-hidden="true" tabindex="-1"></a>filtered_AGE_15_19_control<span class="sc">$</span><span class="st">`</span><span class="at">Crude Rate_15_19</span><span class="st">`</span> <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">as.character</span>(filtered_AGE_15_19_control<span class="sc">$</span><span class="st">`</span><span class="at">Crude Rate_15_19</span><span class="st">`</span>))</span>
+<span id="cb12-57"><a href="#cb12-57" aria-hidden="true" tabindex="-1"></a>AGE_15_19_control_mean <span class="ot">&lt;-</span> filtered_AGE_15_19_control <span class="sc">%&gt;%</span></span>
+<span id="cb12-58"><a href="#cb12-58" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(rank) <span class="sc">%&gt;%</span></span>
+<span id="cb12-59"><a href="#cb12-59" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.numeric), mean, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb12-60"><a href="#cb12-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-61"><a href="#cb12-61" aria-hidden="true" tabindex="-1"></a>AGE_20_24_control <span class="ot">&lt;-</span> AGE_20_24[AGE_20_24<span class="sc">$</span>type <span class="sc">==</span> <span class="dv">3</span>, ]</span>
+<span id="cb12-62"><a href="#cb12-62" aria-hidden="true" tabindex="-1"></a>filtered_AGE_20_24_control <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind, <span class="fu">by</span>(AGE_20_24_control, AGE_20_24_control<span class="sc">$</span>State, select_random_years))</span>
+<span id="cb12-63"><a href="#cb12-63" aria-hidden="true" tabindex="-1"></a>filtered_AGE_20_24_control <span class="ot">&lt;-</span> filtered_AGE_20_24_control <span class="sc">%&gt;%</span></span>
+<span id="cb12-64"><a href="#cb12-64" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(State, Year) <span class="sc">%&gt;%</span></span>
+<span id="cb12-65"><a href="#cb12-65" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(State) <span class="sc">%&gt;%</span></span>
+<span id="cb12-66"><a href="#cb12-66" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">rank =</span> <span class="fu">row_number</span>() <span class="sc">-</span> <span class="dv">6</span>) <span class="sc">%&gt;%</span>  </span>
+<span id="cb12-67"><a href="#cb12-67" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb12-68"><a href="#cb12-68" aria-hidden="true" tabindex="-1"></a>AGE_20_24_control_mean <span class="ot">&lt;-</span> filtered_AGE_20_24_control <span class="sc">%&gt;%</span></span>
+<span id="cb12-69"><a href="#cb12-69" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(rank) <span class="sc">%&gt;%</span></span>
+<span id="cb12-70"><a href="#cb12-70" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.numeric), mean, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb12-71"><a href="#cb12-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-72"><a href="#cb12-72" aria-hidden="true" tabindex="-1"></a>AGE_25_29_control <span class="ot">&lt;-</span> AGE_25_29[AGE_25_29<span class="sc">$</span>type <span class="sc">==</span> <span class="dv">3</span>, ]</span>
+<span id="cb12-73"><a href="#cb12-73" aria-hidden="true" tabindex="-1"></a>filtered_AGE_25_29_control <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind, <span class="fu">by</span>(AGE_25_29_control, AGE_25_29_control<span class="sc">$</span>State, select_random_years))</span>
+<span id="cb12-74"><a href="#cb12-74" aria-hidden="true" tabindex="-1"></a>filtered_AGE_25_29_control <span class="ot">&lt;-</span> filtered_AGE_25_29_control <span class="sc">%&gt;%</span></span>
+<span id="cb12-75"><a href="#cb12-75" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(State, Year) <span class="sc">%&gt;%</span></span>
+<span id="cb12-76"><a href="#cb12-76" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(State) <span class="sc">%&gt;%</span></span>
+<span id="cb12-77"><a href="#cb12-77" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">rank =</span> <span class="fu">row_number</span>() <span class="sc">-</span> <span class="dv">6</span>) <span class="sc">%&gt;%</span>  </span>
+<span id="cb12-78"><a href="#cb12-78" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb12-79"><a href="#cb12-79" aria-hidden="true" tabindex="-1"></a>AGE_25_29_control_mean <span class="ot">&lt;-</span> filtered_AGE_25_29_control <span class="sc">%&gt;%</span></span>
+<span id="cb12-80"><a href="#cb12-80" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(rank) <span class="sc">%&gt;%</span></span>
+<span id="cb12-81"><a href="#cb12-81" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.numeric), mean, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb12-82"><a href="#cb12-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-83"><a href="#cb12-83" aria-hidden="true" tabindex="-1"></a>AGE_30_34_control <span class="ot">&lt;-</span> AGE_30_34[AGE_30_34<span class="sc">$</span>type <span class="sc">==</span> <span class="dv">3</span>, ]</span>
+<span id="cb12-84"><a href="#cb12-84" aria-hidden="true" tabindex="-1"></a>filtered_AGE_30_34_control <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind, <span class="fu">by</span>(AGE_30_34_control, AGE_30_34_control<span class="sc">$</span>State, select_random_years))</span>
+<span id="cb12-85"><a href="#cb12-85" aria-hidden="true" tabindex="-1"></a>filtered_AGE_30_34_control <span class="ot">&lt;-</span> filtered_AGE_30_34_control <span class="sc">%&gt;%</span></span>
+<span id="cb12-86"><a href="#cb12-86" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(State, Year) <span class="sc">%&gt;%</span></span>
+<span id="cb12-87"><a href="#cb12-87" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(State) <span class="sc">%&gt;%</span></span>
+<span id="cb12-88"><a href="#cb12-88" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">rank =</span> <span class="fu">row_number</span>() <span class="sc">-</span> <span class="dv">6</span>) <span class="sc">%&gt;%</span>  </span>
+<span id="cb12-89"><a href="#cb12-89" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb12-90"><a href="#cb12-90" aria-hidden="true" tabindex="-1"></a>AGE_30_34_control_mean <span class="ot">&lt;-</span> filtered_AGE_30_34_control <span class="sc">%&gt;%</span></span>
+<span id="cb12-91"><a href="#cb12-91" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(rank) <span class="sc">%&gt;%</span></span>
+<span id="cb12-92"><a href="#cb12-92" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.numeric), mean, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb12-93"><a href="#cb12-93" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-94"><a href="#cb12-94" aria-hidden="true" tabindex="-1"></a>AGE_35_39_control <span class="ot">&lt;-</span> AGE_35_39[AGE_35_39<span class="sc">$</span>type <span class="sc">==</span> <span class="dv">3</span>, ]</span>
+<span id="cb12-95"><a href="#cb12-95" aria-hidden="true" tabindex="-1"></a>filtered_AGE_35_39_control <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind, <span class="fu">by</span>(AGE_35_39_control, AGE_35_39_control<span class="sc">$</span>State, select_random_years))</span>
+<span id="cb12-96"><a href="#cb12-96" aria-hidden="true" tabindex="-1"></a>filtered_AGE_35_39_control <span class="ot">&lt;-</span> filtered_AGE_35_39_control <span class="sc">%&gt;%</span></span>
+<span id="cb12-97"><a href="#cb12-97" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(State, Year) <span class="sc">%&gt;%</span></span>
+<span id="cb12-98"><a href="#cb12-98" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(State) <span class="sc">%&gt;%</span></span>
+<span id="cb12-99"><a href="#cb12-99" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">rank =</span> <span class="fu">row_number</span>() <span class="sc">-</span> <span class="dv">6</span>) <span class="sc">%&gt;%</span>  </span>
+<span id="cb12-100"><a href="#cb12-100" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb12-101"><a href="#cb12-101" aria-hidden="true" tabindex="-1"></a>AGE_35_39_control_mean <span class="ot">&lt;-</span> filtered_AGE_35_39_control <span class="sc">%&gt;%</span></span>
+<span id="cb12-102"><a href="#cb12-102" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(rank) <span class="sc">%&gt;%</span></span>
+<span id="cb12-103"><a href="#cb12-103" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.numeric), mean, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb12-104"><a href="#cb12-104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-105"><a href="#cb12-105" aria-hidden="true" tabindex="-1"></a>AGE_20_40_control <span class="ot">&lt;-</span> AGE_20_40[AGE_20_40<span class="sc">$</span>type <span class="sc">==</span> <span class="dv">3</span>, ]</span>
+<span id="cb12-106"><a href="#cb12-106" aria-hidden="true" tabindex="-1"></a>filtered_AGE_20_40_control <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind, <span class="fu">by</span>(AGE_20_40_control, AGE_20_40_control<span class="sc">$</span>State, select_random_years))</span>
+<span id="cb12-107"><a href="#cb12-107" aria-hidden="true" tabindex="-1"></a>filtered_AGE_20_40_control <span class="ot">&lt;-</span> filtered_AGE_20_40_control <span class="sc">%&gt;%</span></span>
+<span id="cb12-108"><a href="#cb12-108" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(State, Year) <span class="sc">%&gt;%</span></span>
+<span id="cb12-109"><a href="#cb12-109" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(State) <span class="sc">%&gt;%</span></span>
+<span id="cb12-110"><a href="#cb12-110" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">rank =</span> <span class="fu">row_number</span>() <span class="sc">-</span> <span class="dv">6</span>) <span class="sc">%&gt;%</span>  </span>
+<span id="cb12-111"><a href="#cb12-111" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb12-112"><a href="#cb12-112" aria-hidden="true" tabindex="-1"></a>AGE_20_40_control_mean <span class="ot">&lt;-</span> filtered_AGE_20_40_control <span class="sc">%&gt;%</span></span>
+<span id="cb12-113"><a href="#cb12-113" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(rank) <span class="sc">%&gt;%</span></span>
+<span id="cb12-114"><a href="#cb12-114" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.numeric), mean, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb12-115"><a href="#cb12-115" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-116"><a href="#cb12-116" aria-hidden="true" tabindex="-1"></a>AGE_more40_control <span class="ot">&lt;-</span> AGE_more40[AGE_more40<span class="sc">$</span>type <span class="sc">==</span> <span class="dv">3</span>, ]</span>
+<span id="cb12-117"><a href="#cb12-117" aria-hidden="true" tabindex="-1"></a>filtered_AGE_more40_control <span class="ot">&lt;-</span> <span class="fu">do.call</span>(rbind, <span class="fu">by</span>(AGE_more40_control, AGE_more40_control<span class="sc">$</span>State, select_random_years))</span>
+<span id="cb12-118"><a href="#cb12-118" aria-hidden="true" tabindex="-1"></a>filtered_AGE_more40_control <span class="ot">&lt;-</span> filtered_AGE_more40_control <span class="sc">%&gt;%</span></span>
+<span id="cb12-119"><a href="#cb12-119" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(State, Year) <span class="sc">%&gt;%</span></span>
+<span id="cb12-120"><a href="#cb12-120" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(State) <span class="sc">%&gt;%</span></span>
+<span id="cb12-121"><a href="#cb12-121" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">rank =</span> <span class="fu">row_number</span>() <span class="sc">-</span> <span class="dv">6</span>) <span class="sc">%&gt;%</span>  </span>
+<span id="cb12-122"><a href="#cb12-122" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span>
+<span id="cb12-123"><a href="#cb12-123" aria-hidden="true" tabindex="-1"></a>AGE_more40_control_mean <span class="ot">&lt;-</span> filtered_AGE_more40_control <span class="sc">%&gt;%</span></span>
+<span id="cb12-124"><a href="#cb12-124" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(rank) <span class="sc">%&gt;%</span></span>
+<span id="cb12-125"><a href="#cb12-125" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.numeric), mean, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb12-126"><a href="#cb12-126" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-127"><a href="#cb12-127" aria-hidden="true" tabindex="-1"></a>ALL_AGE_mean <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb12-128"><a href="#cb12-128" aria-hidden="true" tabindex="-1"></a>  <span class="at">Crude_Rate_treated =</span> ALL_AGE_treated_mean<span class="sc">$</span><span class="st">`</span><span class="at">Crude Rate</span><span class="st">`</span>,</span>
+<span id="cb12-129"><a href="#cb12-129" aria-hidden="true" tabindex="-1"></a>  <span class="at">Crude_Rate_control =</span> ALL_AGE_control_mean<span class="sc">$</span><span class="st">`</span><span class="at">Crude Rate</span><span class="st">`</span>,</span>
+<span id="cb12-130"><a href="#cb12-130" aria-hidden="true" tabindex="-1"></a>  <span class="at">rank =</span> ALL_AGE_treated_mean<span class="sc">$</span><span class="st">`</span><span class="at">rank</span><span class="st">`</span>)</span>
+<span id="cb12-131"><a href="#cb12-131" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-132"><a href="#cb12-132" aria-hidden="true" tabindex="-1"></a>AGE_15_19_mean <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb12-133"><a href="#cb12-133" aria-hidden="true" tabindex="-1"></a>  <span class="at">Crude_Rate_treated_15_19 =</span> AGE_15_19_treated_mean<span class="sc">$</span><span class="st">`</span><span class="at">Crude Rate_15_19</span><span class="st">`</span>,</span>
+<span id="cb12-134"><a href="#cb12-134" aria-hidden="true" tabindex="-1"></a>  <span class="at">Crude_Rate_control_15_19 =</span> AGE_15_19_control_mean<span class="sc">$</span><span class="st">`</span><span class="at">Crude Rate_15_19</span><span class="st">`</span>,</span>
+<span id="cb12-135"><a href="#cb12-135" aria-hidden="true" tabindex="-1"></a>  <span class="at">rank =</span> AGE_15_19_treated_mean<span class="sc">$</span><span class="st">`</span><span class="at">rank</span><span class="st">`</span>)</span>
+<span id="cb12-136"><a href="#cb12-136" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-137"><a href="#cb12-137" aria-hidden="true" tabindex="-1"></a>AGE_20_24_mean <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb12-138"><a href="#cb12-138" aria-hidden="true" tabindex="-1"></a>  <span class="at">Crude_Rate_treated_20_24 =</span> AGE_20_24_treated_mean<span class="sc">$</span><span class="st">`</span><span class="at">Crude Rate_20_24</span><span class="st">`</span>,</span>
+<span id="cb12-139"><a href="#cb12-139" aria-hidden="true" tabindex="-1"></a>  <span class="at">Crude_Rate_control_20_24 =</span> AGE_20_24_control_mean<span class="sc">$</span><span class="st">`</span><span class="at">Crude Rate_20_24</span><span class="st">`</span>,</span>
+<span id="cb12-140"><a href="#cb12-140" aria-hidden="true" tabindex="-1"></a>  <span class="at">rank =</span> AGE_20_24_treated_mean<span class="sc">$</span><span class="st">`</span><span class="at">rank</span><span class="st">`</span>)</span>
+<span id="cb12-141"><a href="#cb12-141" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-142"><a href="#cb12-142" aria-hidden="true" tabindex="-1"></a>AGE_25_29_mean <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb12-143"><a href="#cb12-143" aria-hidden="true" tabindex="-1"></a>  <span class="at">Crude_Rate_treated_25_29 =</span> AGE_25_29_treated_mean<span class="sc">$</span><span class="st">`</span><span class="at">Crude Rate_25_29</span><span class="st">`</span>,</span>
+<span id="cb12-144"><a href="#cb12-144" aria-hidden="true" tabindex="-1"></a>  <span class="at">Crude_Rate_control_25_29 =</span> AGE_25_29_control_mean<span class="sc">$</span><span class="st">`</span><span class="at">Crude Rate_25_29</span><span class="st">`</span>,</span>
+<span id="cb12-145"><a href="#cb12-145" aria-hidden="true" tabindex="-1"></a>  <span class="at">rank =</span> AGE_25_29_treated_mean<span class="sc">$</span><span class="st">`</span><span class="at">rank</span><span class="st">`</span>)</span>
+<span id="cb12-146"><a href="#cb12-146" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-147"><a href="#cb12-147" aria-hidden="true" tabindex="-1"></a>AGE_30_34_mean <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb12-148"><a href="#cb12-148" aria-hidden="true" tabindex="-1"></a>  <span class="at">Crude_Rate_treated_30_34 =</span> AGE_30_34_treated_mean<span class="sc">$</span><span class="st">`</span><span class="at">Crude Rate_30_34</span><span class="st">`</span>,</span>
+<span id="cb12-149"><a href="#cb12-149" aria-hidden="true" tabindex="-1"></a>  <span class="at">Crude_Rate_control_30_34 =</span> AGE_30_34_control_mean<span class="sc">$</span><span class="st">`</span><span class="at">Crude Rate_30_34</span><span class="st">`</span>,</span>
+<span id="cb12-150"><a href="#cb12-150" aria-hidden="true" tabindex="-1"></a>  <span class="at">rank =</span> AGE_30_34_treated_mean<span class="sc">$</span><span class="st">`</span><span class="at">rank</span><span class="st">`</span>)</span>
+<span id="cb12-151"><a href="#cb12-151" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-152"><a href="#cb12-152" aria-hidden="true" tabindex="-1"></a>AGE_35_39_mean <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb12-153"><a href="#cb12-153" aria-hidden="true" tabindex="-1"></a>  <span class="at">Crude_Rate_treated_35_39 =</span> AGE_35_39_treated_mean<span class="sc">$</span><span class="st">`</span><span class="at">Crude Rate_35_39</span><span class="st">`</span>,</span>
+<span id="cb12-154"><a href="#cb12-154" aria-hidden="true" tabindex="-1"></a>  <span class="at">Crude_Rate_control_35_39 =</span> AGE_35_39_control_mean<span class="sc">$</span><span class="st">`</span><span class="at">Crude Rate_35_39</span><span class="st">`</span>,</span>
+<span id="cb12-155"><a href="#cb12-155" aria-hidden="true" tabindex="-1"></a>  <span class="at">rank =</span> AGE_35_39_treated_mean<span class="sc">$</span><span class="st">`</span><span class="at">rank</span><span class="st">`</span>)</span>
+<span id="cb12-156"><a href="#cb12-156" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-157"><a href="#cb12-157" aria-hidden="true" tabindex="-1"></a>AGE_20_40_mean <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb12-158"><a href="#cb12-158" aria-hidden="true" tabindex="-1"></a>  <span class="at">Crude_Rate_treated_20_40 =</span> AGE_20_40_treated_mean<span class="sc">$</span>Crude_Rate_20_40,</span>
+<span id="cb12-159"><a href="#cb12-159" aria-hidden="true" tabindex="-1"></a>  <span class="at">Crude_Rate_control_20_40 =</span> AGE_20_40_control_mean<span class="sc">$</span>Crude_Rate_20_40,</span>
+<span id="cb12-160"><a href="#cb12-160" aria-hidden="true" tabindex="-1"></a>  <span class="at">rank =</span> AGE_20_40_treated_mean<span class="sc">$</span><span class="st">`</span><span class="at">rank</span><span class="st">`</span>)</span>
+<span id="cb12-161"><a href="#cb12-161" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-162"><a href="#cb12-162" aria-hidden="true" tabindex="-1"></a>AGE_more40_mean <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb12-163"><a href="#cb12-163" aria-hidden="true" tabindex="-1"></a>  <span class="at">Crude_Rate_treated_more40 =</span> AGE_more40_treated_mean<span class="sc">$</span><span class="st">`</span><span class="at">Crude_Rate_gt40</span><span class="st">`</span>,</span>
+<span id="cb12-164"><a href="#cb12-164" aria-hidden="true" tabindex="-1"></a>  <span class="at">Crude_Rate_control_more40 =</span> AGE_more40_control_mean<span class="sc">$</span><span class="st">`</span><span class="at">Crude_Rate_gt40</span><span class="st">`</span>,</span>
+<span id="cb12-165"><a href="#cb12-165" aria-hidden="true" tabindex="-1"></a>  <span class="at">rank =</span> AGE_more40_control_mean<span class="sc">$</span><span class="st">`</span><span class="at">rank</span><span class="st">`</span>)</span>
+<span id="cb12-166"><a href="#cb12-166" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-167"><a href="#cb12-167" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>── Attaching core tidyverse packages ──────────────────────── tidyverse 2.0.0 ──
+✔ forcats   1.0.0     ✔ readr     2.1.5
+✔ ggplot2   3.5.0     ✔ stringr   1.5.1
+✔ lubridate 1.9.3     ✔ tibble    3.2.1
+✔ purrr     1.0.2     
+── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+✖ dplyr::filter() masks stats::filter()
+✖ dplyr::lag()    masks stats::lag()
+ℹ Use the conflicted package (&lt;http://conflicted.r-lib.org/&gt;) to force all conflicts to become errors</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>plot_age_group <span class="ot">&lt;-</span> <span class="cf">function</span>(data, X, Y, Z) {</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  DF_LONG <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">pivot_longer</span>(</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>      <span class="at">cols =</span> <span class="fu">c</span>(<span class="fu">all_of</span>(X), <span class="fu">all_of</span>(Y)), </span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>      <span class="at">names_to =</span> <span class="st">"Treatment"</span>,</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>      <span class="at">values_to =</span> <span class="st">"Crude_Rate"</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>    ) <span class="sc">%&gt;%</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">mutate</span>(<span class="at">Treatment =</span> <span class="fu">recode</span>(Treatment,</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>                              <span class="sc">!!</span><span class="at">X :=</span> <span class="st">"Treated"</span>,  </span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>                              <span class="sc">!!</span><span class="at">Y :=</span> <span class="st">"Control"</span>))  </span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(DF_LONG, <span class="fu">aes</span>(<span class="at">x =</span> rank, <span class="at">y =</span> Crude_Rate, <span class="at">color =</span> Treatment, <span class="at">group =</span> Treatment)) <span class="sc">+</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>() <span class="sc">+</span></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_color_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"Treated"</span> <span class="ot">=</span> <span class="st">"blue"</span>, <span class="st">"Control"</span> <span class="ot">=</span> <span class="st">"red"</span>)) <span class="sc">+</span></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Years since legalization"</span>,</span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>         <span class="at">y =</span> <span class="st">"Average crude rate"</span>,</span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>         <span class="at">title =</span> <span class="fu">paste</span>(<span class="st">"Age group ="</span>, Z)) <span class="sc">+</span></span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_vline</span>(<span class="at">xintercept =</span> <span class="dv">0</span>, <span class="at">linetype =</span> <span class="st">"dashed"</span>, <span class="at">color =</span> <span class="st">"red"</span>) <span class="sc">+</span></span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">legend.title =</span> <span class="fu">element_blank</span>()) <span class="sc">+</span></span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>    <span class="fu">guides</span>(<span class="at">color =</span> <span class="fu">guide_legend</span>(<span class="at">override.aes =</span> <span class="fu">list</span>(<span class="at">linetype =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>)))) <span class="sc">+</span></span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_x_continuous</span>(<span class="at">breaks =</span> <span class="fu">min</span>(DF_LONG<span class="sc">$</span>rank, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)<span class="sc">:</span><span class="fu">max</span>(DF_LONG<span class="sc">$</span>rank, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="sc">+</span>  </span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>    <span class="fu">scale_y_continuous</span>(<span class="at">breaks =</span> <span class="fu">pretty</span>(DF_LONG<span class="sc">$</span>Crude_Rate, <span class="at">n =</span> <span class="dv">5</span>))</span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_age_group</span>(ALL_AGE_mean, <span class="st">'Crude_Rate_treated'</span>, <span class="st">'Crude_Rate_control'</span>, <span class="st">"ALL"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Project708_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_age_group</span>(AGE_15_19_mean, <span class="st">'Crude_Rate_treated_15_19'</span>, <span class="st">'Crude_Rate_control_15_19'</span>, <span class="st">"15_19"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Project708_files/figure-html/unnamed-chunk-3-2.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_age_group</span>(AGE_20_24_mean, <span class="st">'Crude_Rate_treated_20_24'</span>, <span class="st">'Crude_Rate_control_20_24'</span>, <span class="st">"20_24"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Project708_files/figure-html/unnamed-chunk-3-3.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_age_group</span>(AGE_25_29_mean, <span class="st">'Crude_Rate_treated_25_29'</span>, <span class="st">'Crude_Rate_control_25_29'</span>, <span class="st">"25_29"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Project708_files/figure-html/unnamed-chunk-3-4.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_age_group</span>(AGE_30_34_mean, <span class="st">'Crude_Rate_treated_30_34'</span>, <span class="st">'Crude_Rate_control_30_34'</span>, <span class="st">"30_34"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Project708_files/figure-html/unnamed-chunk-3-5.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_age_group</span>(AGE_35_39_mean, <span class="st">'Crude_Rate_treated_35_39'</span>, <span class="st">'Crude_Rate_control_35_39'</span>, <span class="st">"35_39"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Project708_files/figure-html/unnamed-chunk-3-6.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_age_group</span>(AGE_20_40_mean, <span class="st">'Crude_Rate_treated_20_40'</span>, <span class="st">'Crude_Rate_control_20_40'</span>, <span class="st">"20_40"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Project708_files/figure-html/unnamed-chunk-3-7.png" class="img-fluid" width="672"></p>
+</div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_age_group</span>(AGE_more40_mean, <span class="st">'Crude_Rate_treated_more40'</span>, <span class="st">'Crude_Rate_control_more40'</span>, <span class="st">"G_40"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Project708_files/figure-html/unnamed-chunk-3-8.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>In each figure, the blue line shows the average death rate for the treated states (states with MMLs) and the red line represents the average death rate for the control states (without MMLs). Year 0 on the horizontal axis represents the year in which legalization took place. Control states were randomly assigned a year of legalization between 1999 and 2020.</p>
+<p>For all age group figure, we can see both lines show an increase in mortality rates over time. However, the treated group shows a more pronounced increase after legalization compared to the control group. In the group age of 15-19 we can see a decrease in both control and treated group. In the third group (20-24), following MMLs the treated group shows an increase in mortality rates. However, control group shows some variation but without a clear increasing trend. In the age group 25-29, both treated and control group experienced a surge after MMLs but this trend increases more sharply post-legalization in treated group. In 30-34 also there is a difference between states with treated and without treated around the time of MMLs.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>perform_regression <span class="ot">&lt;-</span> <span class="cf">function</span>(data, xm) {data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">mml =</span> <span class="fu">ifelse</span>(year_effect <span class="sc">&gt;</span> Year, <span class="dv">0</span>, <span class="dv">1</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">log_crude =</span> <span class="fu">log</span>({{xm}}))</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(log_crude <span class="sc">~</span> mml, <span class="at">data =</span> data)</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a><span class="fu">return</span>(<span class="fu">summary</span>(model))}</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>ALL_AGE_summary <span class="ot">&lt;-</span> <span class="fu">perform_regression</span>(ALL_AGE, <span class="st">`</span><span class="at">Crude Rate</span><span class="st">`</span>)</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>AGE_15_19_summary <span class="ot">&lt;-</span> <span class="fu">perform_regression</span>(AGE_15_19, <span class="st">`</span><span class="at">Crude Rate_15_19</span><span class="st">`</span>)</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>AGE_20_24_summary <span class="ot">&lt;-</span> <span class="fu">perform_regression</span>(AGE_20_24, <span class="st">`</span><span class="at">Crude Rate_20_24</span><span class="st">`</span>)</span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>AGE_25_29_summary <span class="ot">&lt;-</span> <span class="fu">perform_regression</span>(AGE_25_29, <span class="st">`</span><span class="at">Crude Rate_25_29</span><span class="st">`</span>)</span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>AGE_30_34_summary <span class="ot">&lt;-</span> <span class="fu">perform_regression</span>(AGE_30_34, <span class="st">`</span><span class="at">Crude Rate_30_34</span><span class="st">`</span>)</span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>AGE_35_39_summary <span class="ot">&lt;-</span> <span class="fu">perform_regression</span>(AGE_35_39, <span class="st">`</span><span class="at">Crude Rate_35_39</span><span class="st">`</span>)</span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>AGE_20_40_summary <span class="ot">&lt;-</span> <span class="fu">perform_regression</span>(AGE_20_40, <span class="st">`</span><span class="at">Crude_Rate_20_40</span><span class="st">`</span>)</span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>AGE_more40_summary <span class="ot">&lt;-</span> <span class="fu">perform_regression</span>(AGE_more40, <span class="st">`</span><span class="at">Crude_Rate_gt40</span><span class="st">`</span>)</span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>summary_list <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">ALL_AGE =</span> ALL_AGE_summary,<span class="at">AGE_15_19 =</span> AGE_15_19_summary,<span class="at">AGE_20_24 =</span> AGE_20_24_summary,<span class="at">AGE_25_29 =</span> AGE_25_29_summary</span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a>                     ,<span class="at">AGE_30_34 =</span> AGE_30_34_summary,<span class="at">AGE_35_39 =</span> AGE_35_39_summary,<span class="at">AGE_20_40 =</span> AGE_20_40_summary,<span class="at">AGE_more40 =</span> AGE_more40_summary)</span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a>coefficients <span class="ot">&lt;-</span> <span class="fu">numeric</span>(<span class="fu">length</span>(summary_list))</span>
+<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a>t_values <span class="ot">&lt;-</span> <span class="fu">numeric</span>(<span class="fu">length</span>(summary_list))</span>
+<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a>r_squared <span class="ot">&lt;-</span> <span class="fu">numeric</span>(<span class="fu">length</span>(summary_list))</span>
+<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_along</span>(summary_list)) {coefficients[i] <span class="ot">&lt;-</span> summary_list[[i]]<span class="sc">$</span>coefficients[<span class="dv">2</span>, <span class="dv">1</span>]</span>
+<span id="cb22-24"><a href="#cb22-24" aria-hidden="true" tabindex="-1"></a>t_values[i] <span class="ot">&lt;-</span> summary_list[[i]]<span class="sc">$</span>coefficients[<span class="dv">2</span>, <span class="dv">3</span>]</span>
+<span id="cb22-25"><a href="#cb22-25" aria-hidden="true" tabindex="-1"></a>r_squared[i] <span class="ot">&lt;-</span> summary_list[[i]]<span class="sc">$</span>r.squared}</span>
+<span id="cb22-26"><a href="#cb22-26" aria-hidden="true" tabindex="-1"></a>result_table <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">MML =</span> coefficients, <span class="at">T_Values =</span> t_values, <span class="at">R_Squared =</span> r_squared)</span>
+<span id="cb22-27"><a href="#cb22-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-28"><a href="#cb22-28" aria-hidden="true" tabindex="-1"></a><span class="fu">row.names</span>(result_table) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"ALL_AGE"</span>, <span class="st">"AGE_15_19"</span>, <span class="st">"AGE_20_24"</span>, <span class="st">"AGE_25_29"</span>,<span class="st">"AGE_30_34"</span>, <span class="st">"AGE_35_39"</span>, <span class="st">"AGE_20_40"</span>, <span class="st">"AGE_more40"</span>)</span>
+<span id="cb22-29"><a href="#cb22-29" aria-hidden="true" tabindex="-1"></a>transposed_result_table <span class="ot">&lt;-</span> <span class="fu">t</span>(result_table)</span>
+<span id="cb22-30"><a href="#cb22-30" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(transposed_result_table)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>              ALL_AGE   AGE_15_19   AGE_20_24     AGE_25_29   AGE_30_34
+MML       -0.06660984 -0.17442257 -0.05779936 -0.0092936938 0.009747374
+T_Values  -5.76497057 -8.90224694 -3.64604917 -0.4866368816 0.463314536
+R_Squared  0.03553641  0.08076433  0.01452394  0.0002624759 0.000237926
+             AGE_35_39    AGE_20_40   AGE_more40
+MML       -0.044434878 -0.025483864  -0.09685691
+T_Values  -2.330923128 -1.421839970 -10.75737561
+R_Squared  0.005987441  0.002236262   0.11370613</code></pre>
+</div>
+</div>
+<p>The above table presents estimates among 8 age groups. The first column represent the all age group and as we can see the coefficient is -0.066 and significant. This means that after MMLs, the death rate decrease significantly. For the second age group which is 20-24 the coefficient is negative and significant and this trend is the same for 20-24, 35-39. The results suggest that MMLs may have a varying impact on mortality rates across age groups.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>df_all_age_2 <span class="ot">&lt;-</span> ALL_AGE <span class="sc">%&gt;%</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">mml =</span> <span class="fu">ifelse</span>(year_effect <span class="sc">&gt;</span> Year, <span class="dv">0</span>, <span class="dv">1</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">filt_year =</span> <span class="fu">ifelse</span>(year_effect <span class="sc">==</span> Year, <span class="dv">1</span>, <span class="dv">0</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">log_crude =</span> <span class="fu">log</span>(<span class="st">`</span><span class="at">Crude Rate</span><span class="st">`</span>))</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>df_all_age_2 <span class="ot">&lt;-</span> df_all_age_2 <span class="sc">%&gt;%</span></span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(State) <span class="sc">%&gt;%</span></span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">mml_shifted_3 =</span> <span class="fu">lag</span>(mml, <span class="dv">3</span>),</span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>         <span class="at">mml_shifted_2 =</span> <span class="fu">lag</span>(mml, <span class="dv">2</span>),</span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>         <span class="at">mml_shifted_1 =</span> <span class="fu">lag</span>(mml, <span class="dv">1</span>),</span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>         <span class="at">mml_no_shift =</span> <span class="fu">lag</span>(mml, <span class="dv">0</span>),</span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>         <span class="at">mml_1_shifted =</span> <span class="fu">lead</span>(mml, <span class="dv">1</span>),  </span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>         <span class="at">mml_2_shifted =</span> <span class="fu">lead</span>(mml, <span class="dv">2</span>),</span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>         <span class="at">mml_3_shifted =</span> <span class="fu">lead</span>(mml, <span class="dv">3</span>),</span>
+<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a>         <span class="at">mml_4_shifted =</span> <span class="fu">lead</span>(mml, <span class="dv">4</span>),</span>
+<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a>         <span class="at">mml_5_shifted =</span> <span class="fu">lead</span>(mml, <span class="dv">5</span>))</span>
+<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a>reg1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(log_crude <span class="sc">~</span> mml, <span class="at">data =</span> df_all_age_2)</span>
+<span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a>reg2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(log_crude <span class="sc">~</span> mml_shifted_3 <span class="sc">+</span> mml_shifted_2 <span class="sc">+</span> mml_shifted_1 <span class="sc">+</span> mml_no_shift <span class="sc">+</span> mml_1_shifted <span class="sc">+</span> mml_2_shifted <span class="sc">+</span> mml_3_shifted <span class="sc">+</span> mml_4_shifted <span class="sc">+</span> mml_5_shifted, <span class="at">data =</span> df_all_age_2)</span>
+<span id="cb24-21"><a href="#cb24-21" aria-hidden="true" tabindex="-1"></a>reg3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(log_crude <span class="sc">~</span> mml_no_shift <span class="sc">+</span>  mml_1_shifted <span class="sc">+</span> mml_2_shifted <span class="sc">+</span> mml_3_shifted <span class="sc">+</span> mml_4_shifted <span class="sc">+</span> mml_5_shifted, <span class="at">data =</span> df_all_age_2)</span>
+<span id="cb24-22"><a href="#cb24-22" aria-hidden="true" tabindex="-1"></a>reg4 <span class="ot">&lt;-</span> <span class="fu">lm</span>(log_crude <span class="sc">~</span> mml <span class="sc">+</span> State<span class="sc">:</span>Year, <span class="at">data =</span> df_all_age_2)</span>
+<span id="cb24-23"><a href="#cb24-23" aria-hidden="true" tabindex="-1"></a>reg5 <span class="ot">&lt;-</span> <span class="fu">lm</span>(log_crude <span class="sc">~</span> mml_shifted_3 <span class="sc">+</span> mml_shifted_2 <span class="sc">+</span> mml_shifted_1 <span class="sc">+</span> mml_no_shift <span class="sc">+</span> mml_1_shifted <span class="sc">+</span> mml_2_shifted <span class="sc">+</span> mml_3_shifted <span class="sc">+</span> mml_4_shifted <span class="sc">+</span> mml_5_shifted <span class="sc">+</span> State<span class="sc">:</span>Year , <span class="at">data =</span> df_all_age_2)</span>
+<span id="cb24-24"><a href="#cb24-24" aria-hidden="true" tabindex="-1"></a>reg6 <span class="ot">&lt;-</span> <span class="fu">lm</span>(log_crude <span class="sc">~</span> mml_no_shift <span class="sc">+</span>  mml_1_shifted <span class="sc">+</span> mml_2_shifted <span class="sc">+</span> mml_3_shifted <span class="sc">+</span> mml_4_shifted <span class="sc">+</span> mml_5_shifted <span class="sc">+</span> State<span class="sc">:</span>Year , <span class="at">data =</span> df_all_age_2)</span>
+<span id="cb24-25"><a href="#cb24-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-26"><a href="#cb24-26" aria-hidden="true" tabindex="-1"></a>model_names <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"reg1"</span>, <span class="st">"reg2"</span>, <span class="st">"reg3"</span>, <span class="st">"reg4"</span>, <span class="st">"reg5"</span>, <span class="st">"reg6"</span>)</span>
+<span id="cb24-27"><a href="#cb24-27" aria-hidden="true" tabindex="-1"></a>reg_models <span class="ot">&lt;-</span> <span class="fu">list</span>(reg1 , reg2 , reg3 , reg4 , reg5 , reg6)</span>
+<span id="cb24-28"><a href="#cb24-28" aria-hidden="true" tabindex="-1"></a>results_df_regs <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb24-29"><a href="#cb24-29" aria-hidden="true" tabindex="-1"></a>  <span class="at">Model =</span> <span class="fu">character</span>(), <span class="at">Coefficient =</span> <span class="fu">numeric</span>(), <span class="at">T_value =</span> <span class="fu">numeric</span>(), <span class="at">R_squared =</span> <span class="fu">numeric</span>())</span>
+<span id="cb24-30"><a href="#cb24-30" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(reg_models)) {</span>
+<span id="cb24-31"><a href="#cb24-31" aria-hidden="true" tabindex="-1"></a>  model_name <span class="ot">&lt;-</span> model_names[i]</span>
+<span id="cb24-32"><a href="#cb24-32" aria-hidden="true" tabindex="-1"></a>  reg_summary <span class="ot">&lt;-</span> <span class="fu">summary</span>(reg_models[[i]])</span>
+<span id="cb24-33"><a href="#cb24-33" aria-hidden="true" tabindex="-1"></a>  coeffs <span class="ot">&lt;-</span> <span class="fu">coef</span>(reg_summary)</span>
+<span id="cb24-34"><a href="#cb24-34" aria-hidden="true" tabindex="-1"></a>  t_values <span class="ot">&lt;-</span> coeffs[, <span class="dv">3</span>]</span>
+<span id="cb24-35"><a href="#cb24-35" aria-hidden="true" tabindex="-1"></a>  coefficients <span class="ot">&lt;-</span> coeffs[, <span class="dv">1</span>]</span>
+<span id="cb24-36"><a href="#cb24-36" aria-hidden="true" tabindex="-1"></a>  r_squared <span class="ot">&lt;-</span> reg_summary<span class="sc">$</span>r.squared</span>
+<span id="cb24-37"><a href="#cb24-37" aria-hidden="true" tabindex="-1"></a>  model_results <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb24-38"><a href="#cb24-38" aria-hidden="true" tabindex="-1"></a>    <span class="at">Model =</span> model_name, <span class="at">Coefficient =</span> coefficients, <span class="at">T_value =</span> t_values, <span class="at">R_squared =</span> r_squared)</span>
+<span id="cb24-39"><a href="#cb24-39" aria-hidden="true" tabindex="-1"></a>  results_df_regs <span class="ot">&lt;-</span> <span class="fu">rbind</span>(results_df_regs, model_results)}</span>
+<span id="cb24-40"><a href="#cb24-40" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(results_df_regs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                          Model   Coefficient       T_value  R_squared
+(Intercept)                reg1  6.778668e+00 1073.50829434 0.03553641
+mml                        reg1 -6.660984e-02   -5.76497057 0.03553641
+(Intercept)1               reg2  6.766791e+00  891.18564910 0.13229761
+mml_shifted_3              reg2 -6.588840e-02   -1.40402753 0.13229761
+mml_shifted_2              reg2 -1.049517e-02   -0.17081052 0.13229761
+mml_shifted_1              reg2  1.607768e-02    0.26812854 0.13229761
+mml_no_shift               reg2 -7.323233e-02   -1.32958354 0.13229761
+mml_1_shifted              reg2 -1.089904e-02   -0.22251240 0.13229761
+mml_2_shifted              reg2  1.383007e-02    0.29458649 0.13229761
+mml_3_shifted              reg2  5.148643e-04    0.01128478 0.13229761
+mml_4_shifted              reg2  3.588312e-03    0.07965041 0.13229761
+mml_5_shifted              reg2 -2.152682e-02   -0.66546756 0.13229761
+(Intercept)2               reg3  6.771560e+00 1016.64736572 0.13317201
+mml_no_shift1              reg3 -9.924064e-02   -2.80658031 0.13317201
+mml_1_shifted1             reg3 -3.212015e-02   -0.67366950 0.13317201
+mml_2_shifted1             reg3  1.055486e-02    0.22695176 0.13317201
+mml_3_shifted1             reg3  1.257644e-03    0.02820982 0.13317201
+mml_4_shifted1             reg3  3.104889e-03    0.07048900 0.13317201
+mml_5_shifted1             reg3 -2.327993e-02   -0.73958232 0.13317201
+(Intercept)3               reg4 -2.983324e-01   -0.45535724 0.90214891
+mml1                       reg4  2.543346e-02    3.84383107 0.90214891
+StateAlabama:Year          reg4  3.608575e-03   11.06669205 0.90214891
+StateAlaska:Year           reg4  3.274167e-03    9.99555683 0.90214891
+StateArizona:Year          reg4  3.459596e-03   10.58066735 0.90214891
+StateArkansas:Year         reg4  3.602918e-03   11.03553250 0.90214891
+StateCalifornia:Year       reg4  3.370287e-03   10.27926511 0.90214891
+StateColorado:Year         reg4  3.361605e-03   10.25534263 0.90214891
+StateConnecticut:Year      reg4  3.501339e-03   10.71368265 0.90214891
+StateFlorida:Year          reg4  3.564425e-03   10.91762875 0.90214891
+StateGeorgia:Year          reg4  3.455232e-03   10.59642438 0.90214891
+StateHawaii:Year           reg4  3.419606e-03   10.42143648 0.90214891
+StateIdaho:Year            reg4  3.449491e-03   10.57736655 0.90214891
+StateIllinois:Year         reg4  3.491284e-03   10.68558562 0.90214891
+StateIndiana:Year          reg4  3.544779e-03   10.87104293 0.90214891
+StateIowa:Year             reg4  3.559577e-03   10.91642747 0.90214891
+StateKansas:Year           reg4  3.536942e-03   10.84700916 0.90214891
+StateKentucky:Year         reg4  3.589740e-03   11.00893035 0.90214891
+StateLouisiana:Year        reg4  3.555883e-03   10.89146522 0.90214891
+StateMaine:Year            reg4  3.569762e-03   10.84012370 0.90214891
+StateMaryland:Year         reg4  3.470496e-03   10.62461773 0.90214891
+StateMassachusetts:Year    reg4  3.499298e-03   10.70743737 0.90214891
+StateMichigan:Year         reg4  3.534986e-03   10.80583503 0.90214891
+StateMinnesota:Year        reg4  3.446784e-03   10.55202587 0.90214891
+StateMississippi:Year      reg4  3.598004e-03   11.03427190 0.90214891
+StateMissouri:Year         reg4  3.570759e-03   10.94250218 0.90214891
+StateMontana:Year          reg4  3.542256e-03   10.81584792 0.90214891
+StateNebraska:Year         reg4  3.515549e-03   10.78140292 0.90214891
+StateNevada:Year           reg4  3.449275e-03   10.52280227 0.90214891
+StateNew Hampshire:Year    reg4  3.471914e-03   10.61229829 0.90214891
+StateNew Jersey:Year       reg4  3.490885e-03   10.67635926 0.90214891
+StateNew Mexico:Year       reg4  3.479648e-03   10.63483822 0.90214891
+StateNew York:Year         reg4  3.470835e-03   10.62565506 0.90214891
+StateNorth Carolina:Year   reg4  3.515740e-03   10.78198715 0.90214891
+StateOhio:Year             reg4  3.575243e-03   10.95076430 0.90214891
+StateOklahoma:Year         reg4  3.588849e-03   10.99793893 0.90214891
+StateOregon:Year           reg4  3.500951e-03   10.67778655 0.90214891
+StatePennsylvania:Year     reg4  3.600365e-03   11.02771376 0.90214891
+StateRhode Island:Year     reg4  3.570207e-03   10.85913423 0.90214891
+StateSouth Carolina:Year   reg4  3.551582e-03   10.89190610 0.90214891
+StateSouth Dakota:Year     reg4  3.535396e-03   10.83141613 0.90214891
+StateTennessee:Year        reg4  3.577543e-03   10.97152252 0.90214891
+StateTexas:Year            reg4  3.404784e-03   10.44171015 0.90214891
+StateUtah:Year             reg4  3.296618e-03   10.10240378 0.90214891
+StateVirginia:Year         reg4  3.461801e-03   10.61391410 0.90214891
+StateWashington:Year       reg4  3.426768e-03   10.45153223 0.90214891
+StateWest Virginia:Year    reg4  3.675003e-03   11.25729484 0.90214891
+StateWisconsin:Year        reg4  3.516285e-03   10.78365795 0.90214891
+(Intercept)4               reg5  7.012232e+00    9.76776149 0.97214095
+mml_shifted_31             reg5  1.440670e-02    1.48292729 0.97214095
+mml_shifted_21             reg5  7.535974e-03    0.64750402 0.97214095
+mml_shifted_11             reg5  1.624459e-02    1.45294469 0.97214095
+mml_no_shift2              reg5 -1.593935e-02   -1.53914961 0.97214095
+mml_1_shifted2             reg5  7.485357e-03    0.81844198 0.97214095
+mml_2_shifted2             reg5 -7.852795e-04   -0.08917225 0.97214095
+mml_3_shifted2             reg5  6.418260e-04    0.07542567 0.97214095
+mml_4_shifted2             reg5 -2.533262e-03   -0.30125607 0.97214095
+mml_5_shifted2             reg5 -5.728697e-03   -0.87674250 0.97214095
+StateAlabama:Year1         reg5 -4.083350e-05   -0.11423738 0.97214095
+StateArizona:Year1         reg5 -1.893864e-04   -0.52791482 0.97214095
+StateArkansas:Year1        reg5 -4.340902e-05   -0.12130569 0.97214095
+StateCalifornia:Year1      reg5 -2.779678e-04   -0.77231488 0.97214095
+StateColorado:Year1        reg5 -2.854607e-04   -0.79323715 0.97214095
+StateConnecticut:Year1     reg5 -1.447639e-04   -0.40392580 0.97214095
+StateFlorida:Year1         reg5 -8.156044e-05   -0.22791912 0.97214095
+StateGeorgia:Year1         reg5 -1.973537e-04   -0.55212430 0.97214095
+StateIdaho:Year1           reg5 -2.024687e-04   -0.56629095 0.97214095
+StateIllinois:Year1        reg5 -1.555741e-04   -0.43430176 0.97214095
+StateIndiana:Year1         reg5 -1.084291e-04   -0.30334558 0.97214095
+StateIowa:Year1            reg5 -8.847098e-05   -0.24750986 0.97214095
+StateKansas:Year1          reg5 -1.130328e-04   -0.31622509 0.97214095
+StateKentucky:Year1        reg5 -6.360006e-05   -0.17793002 0.97214095
+StateLouisiana:Year1       reg5 -8.906272e-05   -0.24888411 0.97214095
+StateMaryland:Year1        reg5 -1.773713e-04   -0.49533029 0.97214095
+StateMassachusetts:Year1   reg5 -1.432847e-04   -0.39979860 0.97214095
+StateMichigan:Year1        reg5 -1.116787e-04   -0.31099911 0.97214095
+StateMinnesota:Year1       reg5 -1.997552e-04   -0.55783998 0.97214095
+StateMississippi:Year1     reg5 -5.515683e-05   -0.15430890 0.97214095
+StateMissouri:Year1        reg5 -7.906477e-05   -0.22106517 0.97214095
+StateMontana:Year1         reg5 -1.059418e-04   -0.29449566 0.97214095
+StateNebraska:Year1        reg5 -1.310125e-04   -0.36652564 0.97214095
+StateNevada:Year1          reg5 -2.015821e-04   -0.56015562 0.97214095
+StateNew Jersey:Year1      reg5 -1.565553e-04   -0.43639811 0.97214095
+StateNew Mexico:Year1      reg5 -1.707972e-04   -0.47543303 0.97214095
+StateNew York:Year1        reg5 -1.749853e-04   -0.48866719 0.97214095
+StateNorth Carolina:Year1  reg5 -1.353805e-04   -0.37874585 0.97214095
+StateOhio:Year1            reg5 -7.283773e-05   -0.20354368 0.97214095
+StateOklahoma:Year1        reg5 -5.508527e-05   -0.15401847 0.97214095
+StateOregon:Year1          reg5 -1.405909e-04   -0.39062225 0.97214095
+StatePennsylvania:Year1    reg5 -4.393586e-05   -0.12277794 0.97214095
+StateSouth Carolina:Year1  reg5 -9.958956e-05   -0.27861563 0.97214095
+StateSouth Dakota:Year1    reg5 -1.099761e-04   -0.30720204 0.97214095
+StateTennessee:Year1       reg5 -7.410252e-05   -0.20731210 0.97214095
+StateTexas:Year1           reg5 -2.446990e-04   -0.68457960 0.97214095
+StateUtah:Year1            reg5 -3.487157e-04   -0.97500937 0.97214095
+StateVirginia:Year1        reg5 -1.885663e-04   -0.52745466 0.97214095
+StateWashington:Year1      reg5 -2.159856e-04   -0.60010154 0.97214095
+StateWest Virginia:Year1   reg5  2.555147e-05    0.07140131 0.97214095
+StateWisconsin:Year1       reg5 -1.364654e-04   -0.38178094 0.97214095
+(Intercept)5               reg6  9.688686e+00   17.74736616 0.96882768
+mml_no_shift3              reg6  7.218008e-03    0.94971195 0.96882768
+mml_1_shifted3             reg6  9.402033e-03    1.00138191 0.96882768
+mml_2_shifted3             reg6 -1.942152e-03   -0.21228124 0.96882768
+mml_3_shifted3             reg6  2.714641e-03    0.31027285 0.96882768
+mml_4_shifted3             reg6 -1.840690e-03   -0.21279641 0.96882768
+mml_5_shifted3             reg6 -7.821222e-03   -1.18942932 0.96882768
+StateAlabama:Year2         reg6 -1.375252e-03   -5.05555054 0.96882768
+StateAlaska:Year1          reg6 -1.747976e-03   -6.36605389 0.96882768
+StateArizona:Year2         reg6 -1.519476e-03   -5.56759729 0.96882768
+StateArkansas:Year2        reg6 -1.374467e-03   -5.04716546 0.96882768
+StateCalifornia:Year2      reg6 -1.600798e-03   -5.84867785 0.96882768
+StateColorado:Year2        reg6 -1.612766e-03   -5.89303405 0.96882768
+StateConnecticut:Year2     reg6 -1.474404e-03   -5.40634319 0.96882768
+StateFlorida:Year2         reg6 -1.407418e-03   -5.16816405 0.96882768
+StateGeorgia:Year2         reg6 -1.527965e-03   -5.61693800 0.96882768
+StateHawaii:Year1          reg6 -1.584010e-03   -5.76025782 0.96882768
+StateIdaho:Year2           reg6 -1.536044e-03   -5.64519851 0.96882768
+StateIllinois:Year2        reg6 -1.485174e-03   -5.44779670 0.96882768
+StateIndiana:Year2         reg6 -1.440467e-03   -5.29528682 0.96882768
+StateIowa:Year2            reg6 -1.419237e-03   -5.21724517 0.96882768
+StateKansas:Year2          reg6 -1.443708e-03   -5.30720233 0.96882768
+StateKentucky:Year2        reg6 -1.397056e-03   -5.13570438 0.96882768
+StateLouisiana:Year2       reg6 -1.422859e-03   -5.22486649 0.96882768
+StateMaine:Year1           reg6 -1.411350e-03   -5.12981113 0.96882768
+StateMaryland:Year2        reg6 -1.507234e-03   -5.53070786 0.96882768
+StateMassachusetts:Year2   reg6 -1.471836e-03   -5.39692642 0.96882768
+StateMichigan:Year2        reg6 -1.445577e-03   -5.29300105 0.96882768
+StateMinnesota:Year2       reg6 -1.531130e-03   -5.61839494 0.96882768
+StateMississippi:Year2     reg6 -1.388366e-03   -5.10375826 0.96882768
+StateMissouri:Year2        reg6 -1.408990e-03   -5.17653125 0.96882768
+StateMontana:Year2         reg6 -1.439422e-03   -5.25788728 0.96882768
+StateNebraska:Year2        reg6 -1.460910e-03   -5.37043886 0.96882768
+StateNevada:Year2          reg6 -1.526819e-03   -5.57898452 0.96882768
+StateNew Jersey:Year2      reg6 -1.482311e-03   -5.43141631 0.96882768
+StateNew Mexico:Year2      reg6 -1.507414e-03   -5.51750979 0.96882768
+StateNew York:Year2        reg6 -1.503390e-03   -5.51660460 0.96882768
+StateNorth Carolina:Year2  reg6 -1.465798e-03   -5.38840477 0.96882768
+StateOhio:Year2            reg6 -1.406962e-03   -5.16648845 0.96882768
+StateOklahoma:Year2        reg6 -1.387286e-03   -5.09679296 0.96882768
+StateOregon:Year2          reg6 -1.466285e-03   -5.35722374 0.96882768
+StatePennsylvania:Year2    reg6 -1.373719e-03   -5.04441968 0.96882768
+StateSouth Carolina:Year2  reg6 -1.433152e-03   -5.26839779 0.96882768
+StateSouth Dakota:Year2    reg6 -1.440209e-03   -5.28562584 0.96882768
+StateTennessee:Year2       reg6 -1.407292e-03   -5.17333429 0.96882768
+StateTexas:Year2           reg6 -1.573710e-03   -5.78510063 0.96882768
+StateUtah:Year2            reg6 -1.682332e-03   -6.18077102 0.96882768
+StateVirginia:Year2        reg6 -1.518926e-03   -5.58276507 0.96882768
+StateWashington:Year2      reg6 -1.541451e-03   -5.63185038 0.96882768
+StateWest Virginia:Year2   reg6 -1.308533e-03   -4.80457782 0.96882768
+StateWisconsin:Year2       reg6 -1.467669e-03   -5.39528556 0.96882768</code></pre>
+</div>
+</div>
+<p>This table presents ordinary least squares (OLS) estimates of the relationship between MMLs and log death rate. The regressions are weighted by the population of state s in year t. The baseline estimate (reg1) suggests that legalization leads to a decrease (6.6%) in death rate. In re 2 and 3 , we lag the MML indicator. The MML lags are jointly significant and are, without exception, negative. As we can see, we do not have any significant result. However, in reg 3 we can see that in the year of MMLs (mmm_no_shift) the death rates decrease. In reg 4 we have added State-specific linear time trends. We want to see how the coefficient has changed after controlling for state fix effect. As we can see, after controlling for state fix effect, the coefficient for mml1 is significant and positive. It means there is a difference after MMLs.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>df_control_all <span class="ot">&lt;-</span> <span class="fu">merge</span>(ALL_AGE, control_variables, <span class="at">by =</span> <span class="fu">c</span>(<span class="st">"State"</span>, <span class="st">"Year"</span>), <span class="at">all.x =</span> <span class="cn">TRUE</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">log_crude =</span> <span class="fu">log</span>(<span class="st">`</span><span class="at">Crude Rate</span><span class="st">`</span>))</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>control_reg1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(log_crude <span class="sc">~</span> log_income, <span class="at">data =</span> df_control_all)</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>control_reg2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(log_crude <span class="sc">~</span> unemployement, <span class="at">data =</span> df_control_all)</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>control_reg3 <span class="ot">&lt;-</span> <span class="fu">lm</span>(log_crude <span class="sc">~</span> log_income <span class="sc">+</span> unemployement, <span class="at">data =</span> df_control_all)</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>control_reg_models <span class="ot">&lt;-</span> <span class="fu">list</span>(control_reg1 , control_reg2 , control_reg3)</span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>control_df_regs <span class="ot">&lt;-</span> <span class="fu">data.frame</span>( <span class="at">Model =</span> <span class="fu">character</span>(), <span class="at">Coefficient =</span> <span class="fu">numeric</span>(), <span class="at">T_value =</span> <span class="fu">numeric</span>(), <span class="at">R_squared =</span> <span class="fu">numeric</span>())</span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(control_reg_models)) {</span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>  model_name <span class="ot">&lt;-</span> <span class="fu">paste</span>(<span class="st">"control_reg"</span>, i, <span class="at">sep =</span> <span class="st">""</span>)</span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>  reg_summary <span class="ot">&lt;-</span> <span class="fu">summary</span>(control_reg_models[[i]])</span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>  coeffs <span class="ot">&lt;-</span> <span class="fu">coef</span>(reg_summary)</span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a>  t_values <span class="ot">&lt;-</span> coeffs[, <span class="dv">3</span>]</span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a>  coefficients <span class="ot">&lt;-</span> coeffs[, <span class="dv">1</span>]</span>
+<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a>  r_squared <span class="ot">&lt;-</span> reg_summary<span class="sc">$</span>r.squared</span>
+<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a>  model_results <span class="ot">&lt;-</span> <span class="fu">data.frame</span>( <span class="at">Model =</span> model_name, <span class="at">Coefficient =</span> coefficients, <span class="at">T_value =</span> t_values, <span class="at">R_squared =</span> r_squared)</span>
+<span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a>  control_df_regs <span class="ot">&lt;-</span> <span class="fu">rbind</span>(control_df_regs, model_results)}</span>
+<span id="cb26-19"><a href="#cb26-19" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(control_df_regs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                      Model   Coefficient      T_value    R_squared
+(Intercept)    control_reg1  7.3446958816  32.63524933 7.462647e-03
+log_income     control_reg1 -0.1277642925  -2.60421167 7.462647e-03
+(Intercept)1   control_reg2  6.7581882595 421.58287234 1.668150e-06
+unemployement  control_reg2  0.0001038257   0.03879012 1.668150e-06
+(Intercept)2   control_reg3  7.3438193796  32.60128347 7.484690e-03
+log_income1    control_reg3 -0.1280377879  -2.60634738 7.484690e-03
+unemployement1 control_reg3  0.0003777139   0.14145979 7.484690e-03</code></pre>
+</div>
+</div>
+<p>Finally in this table we examined whether the control variables(income and unemployment), predict the possage of MMLs. In the first model, we controlled for log income which was negative and significant. In the second model we controlled for unemployement which was not significant. In the third model we controlled for the both at the same time.</p>
+</section>
+<section id="conclusion" class="level1">
+<h1>conclusion</h1>
+<p>This study provides a comprehensive view of how MMLs influence overall death rates. While previoyus studies have provided great insights, their finding is fragmented due to focus on specific areas. This paper closes this gap by providing a holistic view. Using a difference-in-differences analysis, our findings suggest that although there was a decrease in mortality rates in both states with and without MMLs, the reduction in mortality was more pronounced in states that implemented MMLs. This implies that while general trends indicate a decrease in death rates across the states, MMLs may have had an additional impact that further drove down the number of deaths in those states beyond what was observed in states without such laws. This can show the positive public health implications of MMLs, but it would be important to control for other variables and factors that may also influence mortality rates to assert this conclusion with greater certainty.</p>
+</section>
+<section id="references" class="level1">
+<h1>References</h1>
+<p>1.&nbsp;&nbsp;&nbsp;&nbsp; Anderson, D. M., Rees, D. I., &amp; Sabia, J. J. (2014). Medical marijuana laws and suicides by gender and age.&nbsp;American Journal of Public Health,&nbsp;104(12), 2369-2376.</p>
+<p>2.&nbsp;&nbsp;&nbsp;&nbsp; Powell, D., Pacula, R. L., &amp; Jacobson, M. (2018). Do medical marijuana laws reduce addictions and deaths related to pain killers?.&nbsp;Journal of Health Economics,&nbsp;58, 29-42.</p>
+<p>3.&nbsp;&nbsp;&nbsp;&nbsp; Franz, C. A., &amp; Frishman, W. H. (2016). Marijuana use and cardiovascular disease.&nbsp;Cardiology in Review,&nbsp;24(4), 158-162.</p>
+<p>4.&nbsp;&nbsp;&nbsp;&nbsp; Kalbfuß, J., Odermatt, R., &amp; Stutzer, A. (2018). Medical marijuana laws and mental health in the United States.</p>
+<p>5.&nbsp;&nbsp;&nbsp;&nbsp; Morris, R. G., TenEyck, M., Barnes, J. C., &amp; Kovandzic, T. V. (2014). The effect of medical marijuana laws on crime: evidence from state panel data, 1990-2006.&nbsp;<em>PloS one</em>,&nbsp;<em>9</em>(3), e92816.</p>
+<p>6.&nbsp;&nbsp;&nbsp;&nbsp; Chihuri, S., &amp; Li, G. (2019). State marijuana laws and opioid overdose mortality. Injury epidemiology, 6(1), 1-12.</p>
+<p>7.&nbsp;&nbsp;&nbsp;&nbsp; Kim, J. H., Santaella-Tenorio, J., Mauro, C., Wrobel, J., Cerdà, M., Keyes, K. M., … &amp; Li, G. (2016). State medical marijuana laws and the prevalence of opioids detected among fatally injured drivers. American journal of public health, 106(11), 2032-2037.</p>
+<p>8.&nbsp;&nbsp;&nbsp;&nbsp; Alcocer, J. J. (2020). Exploring the effect of Colorado’s recreational marijuana policy on opioid overdose rates. Public health, 185, 8-14.</p>
+<p>9.&nbsp;&nbsp;&nbsp;&nbsp; Cook, A. C., Leung, G., &amp; Smith, R. A. (2020). Marijuana decriminalization, medical marijuana laws, and fatal traffic crashes in US cities, 2010–2017. American journal of public health, 110(3), 363-369.</p>
+<p>10.&nbsp; Bartos, B. J., Newark, C., &amp; McCleary, R. (2020). Marijuana medicalization and motor vehicle fatalities: a synthetic control group approach. Journal of experimental criminology, 16, 247-264.</p>
+<p>11.&nbsp; Els, C., Jackson, T. D., Tsuyuki, R. T., Aidoo, H., Wyatt, G., Sowah, D., … &amp; Straube, S. (2019). Impact of cannabis use on road traffic collisions and safety at work: systematic review and meta-analysis. Canadian Journal of Addiction, 10(1), 8-15.</p>
+<p>12.&nbsp; Bartos, B. J., Kubrin, C. E., Newark, C., &amp; McCleary, R. (2019). Medical marijuana laws and suicide. Archives of suicide research.</p>
+<p>13.&nbsp; Henkel, D. (2011). Unemployment and substance use: a review of the literature (1990-2010).&nbsp;<em>Current drug abuse reviews</em>,&nbsp;<em>4</em>(1), 4-27.</p>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
